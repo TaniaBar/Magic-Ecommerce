@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+
+<section class="container my-5 position-relative">
+    <div class="row justify-content-center position-relative">
+        <div class="col-md-6 col-lg-6 bg-white p-4 rounded shadow-sm div-form" >
+
+            <h1 class="h3 mb-4 font-weight-bold text-center">Inscrivez-vous</h1>
+
+            <form method="post">
+
+                {{ form_errors(registrationForm) }}
+
+                {{ form_start(registrationForm) }}
+
+                    <div class="form-group mb-3">
+                        {{ form_row(registrationForm.prenom, { 
+                            label: 'Prénom',  
+                        })}}
+                    </div>
+
+                    <div class="form-group mb-3">
+                        {{ form_row(registrationForm.nom, { 
+                            label: 'Nom',
+                        })}}
+                    </div>
+
+                    <div class="form-group mb-3">
+                        {{ form_row(registrationForm.adresse, { 
+                            label: 'Adresse',   
+                        })}}
+                    </div>
+
+                    <div class="form-group mb-3">
+                        {{ form_row(registrationForm.code_postal, { 
+                            label: 'Code postal',
+                        })}}
+                    </div>
+
+                    <div class="form-group mb-3">
+                        {{ form_row(registrationForm.ville, { 
+                            label: 'Ville',
+                        })}}
+                    </div>
+
+                    <div class="form-group mb-3">
+                        {{ form_row(registrationForm.email, { 
+                            label: 'E-mail'    
+                        })}}
+                    </div>
+
+                    <div class="form-group mb-3" >
+                        {{ form_row(registrationForm.plainPassword.first) }}                       
+                    </div>
+
+                    <div class="form-group mb-3">
+                        {{ form_row(registrationForm.plainPassword.second) }}                       
+                    </div>
+                    <div id="password-message" class="mt-2 mb-2"></div>
+                    
+                    <div class="form-group mb-3 d-flex align-items-center">
+                        {{ form_widget(registrationForm.agreeTerms, { attr: { class: 'form-check-input' } }) }}
+                        {{ form_label(registrationForm.agreeTerms, 'J\'accepte les conditions', { label_attr: { class: 'form-check-label ms-2' } }) }}
+                        {{ form_errors(registrationForm.agreeTerms) }}
+                    </div>
+                    
+                    <br>
+                    <button type="submit" class="btn btn-outline-dark mt-4 mb-4 btn-register">M'inscrire</button>
+                    <div class="text-end mb-3">
+                        <a href="{{ path('app_login') }}" class="text-end link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover login-link">Retour au login</a>
+                    </div>
+
+                {{ form_end(registrationForm) }}
+            </form>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
