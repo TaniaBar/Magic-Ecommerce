@@ -7,5 +7,6 @@ import './bootstrap.js';
  */
 import "./vendor/bootstrap/dist/css/bootstrap.min.css";
 import './styles/app.css';
+import './styles/header.css';
 
 console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
