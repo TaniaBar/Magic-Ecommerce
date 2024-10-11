@@ -38,7 +38,7 @@ class Produit
 
     #[ORM\ManyToOne(inversedBy: 'produits')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?entreprise $entreprise = null;
+    private ?Entreprise $entreprise = null;
 
     #[Assert\NotBlank()]
     #[ORM\ManyToOne(inversedBy: 'produits')]
@@ -128,12 +128,12 @@ class Produit
         return $this;
     }
 
-    public function getEntreprise(): ?entreprise
+    public function getEntreprise(): ?Entreprise
     {
         return $this->entreprise;
     }
 
-    public function setEntreprise(?entreprise $entreprise): static
+    public function setEntreprise(?Entreprise $entreprise): static
     {
         $this->entreprise = $entreprise;
 

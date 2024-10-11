@@ -26,13 +26,13 @@ class CommandeDetail
     private ?string $prix = null;
 
     #[ORM\ManyToOne(inversedBy: 'commandeDetails')]
-    private ?commande $commande = null;
+    private ?Commande $commande = null;
 
     #[ORM\ManyToOne(inversedBy: 'commandeDetails')]
-    private ?produit $produit = null;
+    private ?Produit $produit = null;
 
     #[ORM\ManyToOne(inversedBy: 'commandeDetails')]
-    private ?entreprise $entreprise = null;
+    private ?Entreprise $entreprise = null;
 
     public function getId(): ?int
     {
@@ -63,36 +63,36 @@ class CommandeDetail
         return $this;
     }
 
-    public function getCommande(): ?commande
+    public function getCommande(): ?Commande
     {
         return $this->commande;
     }
 
-    public function setCommande(?commande $commande): static
+    public function setCommande(?Commande $commande): static
     {
         $this->commande = $commande;
 
         return $this;
     }
 
-    public function getProduit(): ?produit
+    public function getProduit(): ?Produit
     {
         return $this->produit;
     }
 
-    public function setProduit(?produit $produit): static
+    public function setProduit(?Produit $produit): static
     {
         $this->produit = $produit;
 
         return $this;
     }
 
-    public function getEntreprise(): ?entreprise
+    public function getEntreprise(): ?Entreprise
     {
         return $this->entreprise;
     }
 
-    public function setEntreprise(?entreprise $entreprise): static
+    public function setEntreprise(?Entreprise $entreprise): static
     {
         $this->entreprise = $entreprise;
 

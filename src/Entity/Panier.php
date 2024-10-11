@@ -32,12 +32,12 @@ class Panier
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-    private ?user $user = null;
+    private ?User $user = null;
 
     /**
      * @var Collection<int, produit>
      */
-    #[ORM\ManyToMany(targetEntity: produit::class, inversedBy: 'paniers')]
+    #[ORM\ManyToMany(targetEntity: Produit::class, inversedBy: 'paniers')]
     private Collection $produit;
 
     public function __construct()
@@ -86,12 +86,12 @@ class Panier
         return $this;
     }
 
-    public function getUser(): ?user
+    public function getUser(): ?User
     {
         return $this->user;
     }
 
-    public function setUser(user $user): static
+    public function setUser(User $user): static
     {
         $this->user = $user;
 
@@ -106,7 +106,7 @@ class Panier
         return $this->produit;
     }
 
-    public function addProduit(produit $produit): static
+    public function addProduit(Produit $produit): static
     {
         if (!$this->produit->contains($produit)) {
             $this->produit->add($produit);
@@ -115,7 +115,7 @@ class Panier
         return $this;
     }
 
-    public function removeProduit(produit $produit): static
+    public function removeProduit(Produit $produit): static
     {
         $this->produit->removeElement($produit);
 
