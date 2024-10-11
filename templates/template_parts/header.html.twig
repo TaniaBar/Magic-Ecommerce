@@ -24,7 +24,7 @@
 				<ul class="navbar-nav ms-auto">
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle a-header" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							Dropdown
+							ESPACE PERSONNEL
 						</a>
 						<ul class="dropdown-menu dropdown-menu-end me-4">
 							<li>
@@ -35,7 +35,15 @@
 							</li>
 							<li><hr class="dropdown-divider"></li>
 							<li>
-								<a class="dropdown-item a-header" href="#">Something else here</a>
+								{% if app.user %}
+									<a class="dropdown-item a-header" href="#">ESPACE CLIENT</a>
+									{% if 'ROLE_ENTREPRISE' in app.user.roles %}
+										<a href="#" class="dropdown-item a-header">ESPACE ENTREPRISE</a>
+									{% endif %}
+									<a href="{{ path('app_logout') }}" class="dropdown-item a-header">ME DÉCONNECTER</a>
+								{% else %}
+									<a href="{{ path('app_login') }}" class="dropdown-item a-header">SE CONNECTER</a>
+								{% endif %}
 							</li>
 						</ul>
 					</li>

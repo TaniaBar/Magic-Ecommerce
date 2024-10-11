@@ -1,0 +1,8 @@
+.home-title {
+    font-family: var(--font-title);
+    font-size: min(max(1.5rem, 3.5vw), 3rem);
+}
+
+.home-h3 {
+    font-size: min(max(0.8rem, 2vw), 3rem);
+}

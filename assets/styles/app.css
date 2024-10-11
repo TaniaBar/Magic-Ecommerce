@@ -1,3 +1,7 @@
+:root {
+    --font-title: "Indie Flower", cursive;
+}
+
 * {
     margin: 0;
     padding: 0;
