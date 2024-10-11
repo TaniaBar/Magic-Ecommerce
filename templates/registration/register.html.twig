@@ -17,6 +17,16 @@
                 {{ form_start(registrationForm) }}
 
                     <div class="form-group mb-3">
+                        <label for="{{ registrationForm.roles.vars.id }}"> Vous vous inscrivez en tant que </label><br>
+                        {% for choice in registrationForm.roles %}
+                            <div class="form-check form-check-inline">
+                                {{ form_widget(choice, {'attr': {'class': 'form-check-input'}}) }}
+                                <label class="form-check-label" for="{{ choice.vars.id }}">{{ choice.vars.label }}</label>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="form-group mb-3">
                         {{ form_row(registrationForm.prenom, { 
                             label: 'Prénom',  
                         })}}

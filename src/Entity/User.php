@@ -6,6 +6,7 @@ namespace App\Entity;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -85,6 +86,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->entreprises = new ArrayCollection();
         $this->commandes = new ArrayCollection();
+        $this->cree_le = new DateTimeImmutable();
     }
 
     public function getId(): ?int
