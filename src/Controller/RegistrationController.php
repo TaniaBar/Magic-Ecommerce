@@ -21,8 +21,6 @@ class RegistrationController extends AbstractController
     {
         $user = new User();
 
-        // $roles = $user->getRoles();
-
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
@@ -32,27 +30,25 @@ class RegistrationController extends AbstractController
 
             // encode the plain password
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
+            
+            $role = $form->get('roles')->getData();
+            $user->setRoles([$role]);
 
-            if ($form->get('roles')->getData() === 'ROLE_ENTREPRISE') {
-                $user->setRoles(['ROLE_ENTREPRISE']);
-            } else {
-                $user->setRoles(['ROLE_USER']);
-            }
+            // Controlla se l'utente ha selezionato il ruolo di impresa
+        if ($role === 'ROLE_ENTREPRISE') {
+            // Crea un nuovo oggetto Entreprise e imposta i dati
+            $entreprise = new Entreprise();
+            $entreprise->setNomEntreprise($form->get('nom_entreprise')->getData());
+            $entreprise->setAdresseEntreprise($form->get('adresse_entreprise')->getData());
+            $entreprise->setEmailEntreprise($form->get('email_entreprise')->getData());
+
+            // Persisti l'oggetto Entreprise
+            $entityManager->persist($entreprise);
+            // Associa l'impresa all'utente, se necessario (a seconda della tua logica)
+            $user->addEntreprise($entreprise); // Assicurati di avere un metodo setEntreprise nell'oggetto User
+        }
 
             $entityManager->persist($user);
-            $entityManager->flush();
-
-            if ($form->get('roles')->getData() === 'ROLE_ENTREPRISE') {
-                $user->setRoles(['ROLE_ENTREPRISE']);
-
-                $entreprise = new Entreprise();
-                $entreprise->setNom($form->get('nom_entreprise')->getData());
-                $entreprise->setAdresse($form->get('adresse_entreprise')->getData());
-                $entreprise->setEmail($form->get('email_entreprise')->getData());
-                $entreprise->setUser($user);
-
-                $entityManager->persist($entreprise);
-            }
             $entityManager->flush();
             // do anything else you need here, like send an email
 

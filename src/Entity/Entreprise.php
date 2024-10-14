@@ -20,16 +20,16 @@ class Entreprise
 
     #[Assert\NotBlank()]
     #[ORM\Column(length: 150)]
-    private ?string $nom = null;
+    private ?string $nom_entreprise = null;
 
     #[Assert\NotBlank()]
     #[ORM\Column(length: 150)]
-    private ?string $adresse = null;
+    private ?string $adresse_entreprise = null;
 
     #[Assert\NotBlank()]
     #[Assert\Email()]
     #[ORM\Column(length: 254)]
-    private ?string $email = null;
+    private ?string $email_entreprise = null;
 
     #[ORM\ManyToOne(inversedBy: 'entreprises')]
     #[ORM\JoinColumn(nullable: false)]
@@ -52,7 +52,7 @@ class Entreprise
 
     public function __toString()
     {
-        return $this->nom;
+        return $this->nom_entreprise;
     }
 
     public function __construct()
@@ -67,38 +67,38 @@ class Entreprise
         return $this->id;
     }
 
-    public function getNom(): ?string
+    public function getNomEntreprise(): ?string
     {
-        return $this->nom;
+        return $this->nom_entreprise;
     }
 
-    public function setNom(string $nom): static
+    public function setNomEntreprise(string $nom): static
     {
-        $this->nom = $nom;
+        $this->nom_entreprise = $nom;
 
         return $this;
     }
 
-    public function getAdresse(): ?string
+    public function getAdresseEntreprise(): ?string
     {
-        return $this->adresse;
+        return $this->adresse_entreprise;
     }
 
-    public function setAdresse(string $adresse): static
+    public function setAdresseEntreprise(string $adresse): static
     {
-        $this->adresse = $adresse;
+        $this->adresse_entreprise = $adresse;
 
         return $this;
     }
 
-    public function getEmail(): ?string
+    public function getEmailEntreprise(): ?string
     {
-        return $this->email;
+        return $this->email_entreprise;
     }
 
-    public function setEmail(string $email): static
+    public function setEmailEntreprise(string $email): static
     {
-        $this->email = $email;
+        $this->email_entreprise = $email;
 
         return $this;
     }
@@ -186,4 +186,5 @@ class Entreprise
 
         return $this;
     }
+
 }
