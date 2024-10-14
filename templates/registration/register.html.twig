@@ -20,11 +20,33 @@
                         <label for="{{ registrationForm.roles.vars.id }}"> Vous vous inscrivez en tant que </label><br>
                         {% for choice in registrationForm.roles %}
                             <div class="form-check form-check-inline">
-                                {{ form_widget(choice, {'attr': {'class': 'form-check-input'}}) }}
+                                {{ form_widget(choice, {'attr': {'class': 'form-check-input role-selector'}}) }}
                                 <label class="form-check-label" for="{{ choice.vars.id }}">{{ choice.vars.label }}</label>
                             </div>
                         {% endfor %}
                     </div>
+
+                    {# campi aggiuntivi per l'azienda #}
+                    <div id="company-fields" style="display: none;">
+                        <p>Champs pour enregistrer votre entreprise</p>
+                        <div class="form-group mb-3">
+                            {{ form_row(registrationForm.nom_entreprise, {
+                                label: 'Nom de l\'entreprise',
+                            }) }}
+                        </div>
+                        <div class="form-group mb-3">
+                            {{ form_row(registrationForm.adresse_entreprise, { 
+                                label: 'Adresse de l\'entreprise',
+                            }) }}
+                        </div>
+                        <div class="form-group mb-3">
+                            {{ form_row(registrationForm.email_entreprise, { 
+                                label: 'E-mail de l\'entreprise',
+                            }) }}
+                        </div>
+                        <hr>
+                    </div> 
+                    {# fine campi azienda #}
 
                     <div class="form-group mb-3">
                         {{ form_row(registrationForm.prenom, { 

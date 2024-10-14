@@ -60,6 +60,21 @@ class RegistrationFormType extends AbstractType
                 'expanded' => true,
                 'multiple' => false,
             ])
+            ->add('nom_entreprise', TextType::class, [
+                'mapped' => false,
+                'required' => false,
+                'attr' => ['class' => 'form-control '],
+            ])
+            ->add('adresse_entreprise', TextType::class, [
+                'mapped' => false,
+                'required' => false,
+                'attr' => ['class' => 'form-control '],
+            ])
+            ->add('email_entreprise', EmailType::class, [
+                'mapped' => false,
+                'required' => false,
+                'attr' => ['class' => 'form-control '],
+            ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [

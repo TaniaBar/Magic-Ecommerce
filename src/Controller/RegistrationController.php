@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Entreprise;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Security\UserAuthenticator;
@@ -20,7 +21,7 @@ class RegistrationController extends AbstractController
     {
         $user = new User();
 
-        $roles = $user->getRoles();
+        // $roles = $user->getRoles();
 
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -32,7 +33,7 @@ class RegistrationController extends AbstractController
             // encode the plain password
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
 
-            if ($form->get('roles')->getData() === 'Entreprise') {
+            if ($form->get('roles')->getData() === 'ROLE_ENTREPRISE') {
                 $user->setRoles(['ROLE_ENTREPRISE']);
             } else {
                 $user->setRoles(['ROLE_USER']);
@@ -41,6 +42,18 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
+            if ($form->get('roles')->getData() === 'ROLE_ENTREPRISE') {
+                $user->setRoles(['ROLE_ENTREPRISE']);
+
+                $entreprise = new Entreprise();
+                $entreprise->setNom($form->get('nom_entreprise')->getData());
+                $entreprise->setAdresse($form->get('adresse_entreprise')->getData());
+                $entreprise->setEmail($form->get('email_entreprise')->getData());
+                $entreprise->setUser($user);
+
+                $entityManager->persist($entreprise);
+            }
+            $entityManager->flush();
             // do anything else you need here, like send an email
 
             return $security->login($user, UserAuthenticator::class, 'main');

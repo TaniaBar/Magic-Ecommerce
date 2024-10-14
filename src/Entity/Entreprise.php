@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\EntrepriseRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -53,6 +54,7 @@ class Entreprise
     {
         $this->produits = new ArrayCollection();
         $this->commandeDetails = new ArrayCollection();
+        $this->cree_le = new DateTimeImmutable();
     }
 
     public function getId(): ?int

@@ -11,3 +11,18 @@ import './styles/header.css';
 import './styles/home.css';
 
 console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
+
+document.addEventListener('DOMContentLoaded', function() {
+    const roleSelectors = document.querySelectorAll('.role-selector');
+    const companyFields = document.getElementById('company-fields');
+
+    roleSelectors.forEach(function (roleSelector) {
+        roleSelector.addEventListener('change', function() {
+            if (this.value === 'ROLE_ENTREPRISE') {
+                companyFields.style.display = 'block';
+            } else {
+                companyFields.style.display = 'none';
+            }
+        });
+    });
+})
