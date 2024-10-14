@@ -50,6 +50,11 @@ class Entreprise
     #[ORM\OneToMany(targetEntity: CommandeDetail::class, mappedBy: 'entreprise')]
     private Collection $commandeDetails;
 
+    public function __toString()
+    {
+        return $this->nom;
+    }
+
     public function __construct()
     {
         $this->produits = new ArrayCollection();

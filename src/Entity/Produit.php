@@ -57,6 +57,7 @@ class Produit
     #[ORM\OneToMany(targetEntity: CommandeDetail::class, mappedBy: 'produit')]
     private Collection $commandeDetails;
 
+
     public function __construct()
     {
         $this->paniers = new ArrayCollection();
