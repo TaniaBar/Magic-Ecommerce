@@ -16,28 +16,23 @@ class ProduitRepository extends ServiceEntityRepository
         parent::__construct($registry, Produit::class);
     }
 
-    //    /**
-    //     * @return Produit[] Returns an array of Produit objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('p.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    // method to retrieve data in a crescent order of price
+    public function findAllByPriceAsc()
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.prix', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 
-    //    public function findOneBySomeField($value): ?Produit
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    // method to filtre product category
+    public function findByCategory($categorie)
+    {
+        return $this->createQueryBuilder('p')
+            ->leftJoin('p.categorie', 'c')
+            ->where('c.nom = :categorie')
+            ->setParameter('categorie', $categorie)
+            ->getQuery()
+            ->getResult();
+    }
 }
