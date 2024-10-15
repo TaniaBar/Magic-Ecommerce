@@ -24,6 +24,7 @@ class ProduitCrudController extends AbstractCrudController
     {
         return [
             TextField::new('nom'),
+            TextField::new('slug'),
             TextField::new('description'),
             AssociationField::new('entreprise'),
             MoneyField::new('prix')

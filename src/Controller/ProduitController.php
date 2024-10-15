@@ -23,6 +23,21 @@ class ProduitController extends AbstractController
         ]);
     }
 
+    #[Route('/{slug}', name: 'details')]
+    public function details(string $slug, EntityManagerInterface $em): Response
+    {
+        $produit = $em->getRepository(Produit::class)->findOneBy(['slug' => $slug]);
+        // dd($produit);
+
+        if (!$produit) {
+            throw $this->createNotFoundException('Produit non trouvé');
+        }
+
+        return $this->render('produit/details.html.twig', [
+            'produit' => $produit,
+        ]);
+    }
+
     #[Route('/categorie/{categorie}', name: 'find_category')]
     public function findCategory(CategorieRepository $categorieRepository, ProduitRepository $produitRepository, string $categorie): Response
     {
