@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Entreprises magiques{% endblock %}
+
+{% block body %}
+
+    <h2 class="text-center text-uppercase my-4">Tous nos entreprises</h2>
+
+    <section class="container my-4">
+        <div class="row d-flex flex-wrap">
+            {% for entreprise in entreprises %}
+                <div class="col-12 col-md-6 col-lg-4 mb-4 d-flex">
+                    <div class="card w-100 d-flex flex-column">
+                        <div class="div-img">
+                            <img src="{{ asset('images/' ~ entreprise.getImgEntreprise()) }}" class="card-img-top" alt="{{ entreprise.nomEntreprise }}">
+                        </div> 
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title text-center fw-bold fs-3 mb-3">{{ entreprise.nomEntreprise }}</h5>
+                            <p class="text-center">{{ entreprise.adresseEntreprise }}</p>                       
+                            <p class="text-center">{{ entreprise.emailEntreprise }}</p>                       
+                        </div>
+                         <div class="mt-auto  text-center">
+                            <a href="#" class="btn btn-outline-secondary mt-1 mb-3" >Voir tous les produits</a>
+                        </div> 
+                    </div>
+                </div>
+                
+            {% endfor %}
+        </div>
+    </section>
+
+{% endblock %}

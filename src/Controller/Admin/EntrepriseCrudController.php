@@ -22,9 +22,10 @@ class EntrepriseCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('nom'),
-            TextField::new('adresse'),
-            EmailField::new('email'),
+            TextField::new('nom_entreprise'),
+            TextField::new('adresse_entreprise'),
+            EmailField::new('email_entreprise'),
+            TextField::new('img_entreprise'),
             AssociationField::new('user'),
             DateTimeField::new('cree_le')
             

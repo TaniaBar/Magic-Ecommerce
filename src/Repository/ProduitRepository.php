@@ -44,4 +44,15 @@ class ProduitRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    // method to filter product company
+    // public function filterByCompany($entreprise)
+    // {
+    //     return $this->createQueryBuilder('p')
+    //         ->leftJoin('p.entreprise', 'e')
+    //         ->where('e.nom_entreprise = :entreprise')
+    //         ->setParameter('entreprise', $entreprise)
+    //         ->getQuery()
+    //         ->getResult();
+    // }
 }

@@ -50,6 +50,9 @@ class Entreprise
     #[ORM\OneToMany(targetEntity: CommandeDetail::class, mappedBy: 'entreprise')]
     private Collection $commandeDetails;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $img_entreprise = null;
+
     public function __toString()
     {
         return $this->nom_entreprise;
@@ -183,6 +186,18 @@ class Entreprise
                 $commandeDetail->setEntreprise(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImgEntreprise(): ?string
+    {
+        return $this->img_entreprise;
+    }
+
+    public function setImgEntreprise(?string $img_entreprise): static
+    {
+        $this->img_entreprise = $img_entreprise;
 
         return $this;
     }

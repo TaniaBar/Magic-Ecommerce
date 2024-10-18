@@ -35,7 +35,7 @@
                             <h5 class="card-title text-center fw-bold fs-3 mb-3">{{produit.nom}}</h5>
                             <p class="card-text text-center fs-5 produit-description"> {{produit.description}}
                             </p>
-                            {# <p class="card-text text-center fw-bold text-danger">{{produit.prix}} €</p> #}
+                            {# set price with discount if exist, if not set price #}
                             {% set prixRemise = produit.prix %}
                             <div class="d-flex justify-content-center align-items-center mb-2">
                                 {% if produit.remise %}
