@@ -6,3 +6,7 @@
 .home-h3 {
     font-size: min(max(0.8rem, 2vw), 3rem);
 }
+
+.h4-home {
+    font-family: var(--font-title);
+}

@@ -26,15 +26,15 @@
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
             {% for produit in produits %}
                 <div class="col"> 
-                    <div class="card">
-                        <div class="card-title text-center">
-                            <a href="{{ path('app_produit_details', { 'slug': produit.slug }) }}" class="fw-bold ">{{ produit.nom }}</a>
-                        </div>
+                    <div class="card card_homepage">
                         <a href="{{ path('app_produit_details', { 'slug': produit.slug }) }}">
                             <div class="div-img">
                                 <img src="{{ asset('images/' ~ produit.getImageChemin()) }}" class="card-img-top img-fluid" alt="{{ produit.nom }}">
                             </div>
                         </a>
+                        <div class="card-title text-center">
+                            <a href="{{ path('app_produit_details', { 'slug': produit.slug }) }}" class="btn btn-outline-secondary mt-3">{{ produit.nom }}</a>
+                        </div> 
                     </div>
                 </div>
             {% endfor %}
@@ -42,7 +42,7 @@
     </div>
 
     <div class="text-end me-5 mt-4">
-        <a href="{{ path('app_produit_index') }}">Découvrez tous les produits </a>
+        <a href="{{ path('app_produit_index') }}" class="fs-4">Découvrez tous les produits →</a>
     </div>
 
     {# achat simple #}
@@ -51,7 +51,7 @@
             <div class="row align-items-center">
             
                 <div class="col-12 text-center mb-3 mt-5">
-                    <p class="home-p">Que la magie soit avec vous!</p>
+                    <h4 class="h4-home">Que la magie soit avec vous!</h4>
                 </div>
                 <br>
                 <!-- screens larges and mediums -->
