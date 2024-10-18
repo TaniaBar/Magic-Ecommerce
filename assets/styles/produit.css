@@ -1,6 +1,7 @@
 .div-img {
     width: 100%; 
     height: 200px; 
+    /* height: min(max(0.8rem, 1.5vw), 2rem); */
     overflow: hidden;
 }
 
@@ -9,4 +10,5 @@
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    font-size: min(max(0.8rem, 2vw), 3rem);
 }

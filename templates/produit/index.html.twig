@@ -35,7 +35,16 @@
                             <h5 class="card-title text-center fw-bold fs-3 mb-3">{{produit.nom}}</h5>
                             <p class="card-text text-center fs-5 produit-description"> {{produit.description}}
                             </p>
-                            <p class="card-text text-center fw-bold text-danger">{{produit.prix}} €</p>
+                            {# <p class="card-text text-center fw-bold text-danger">{{produit.prix}} €</p> #}
+                            {% set prixRemise = produit.prix %}
+                            <div class="d-flex justify-content-center align-items-center mb-2">
+                                {% if produit.remise %}
+                                    {% set prixRemise = produit.prix - (produit.prix * (produit.remise / 100)) %}
+                                        <p class="card-text text-center fw-bold text-danger text-decoration-line-through me-2 mt-2">{{ produit.prix }} €</p>
+                                {% endif %}
+                                <p class="card-text text-center fw-bold text-danger">{{ prixRemise|number_format(2, '.', ',') }} €</p>
+                            </div>
+
                             <div class="mt-auto d-flex justify-content-between">
                                 <a href="{{ path('app_produit_details', {'slug' : produit.slug})}}" class="btn btn-outline-secondary mt-4 mb-3" >Détails</a>
                                 <a href="#" class="btn btn-outline-secondary mt-4 mb-3">Ajouter au panier</a> 
