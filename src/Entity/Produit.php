@@ -60,6 +60,9 @@ class Produit
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $slug = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $remise = null;
+
 
     public function __construct()
     {
@@ -221,6 +224,18 @@ class Produit
     public function setSlug(?string $slug): static
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getRemise(): ?int
+    {
+        return $this->remise;
+    }
+
+    public function setRemise(?int $remise): static
+    {
+        $this->remise = $remise;
 
         return $this;
     }

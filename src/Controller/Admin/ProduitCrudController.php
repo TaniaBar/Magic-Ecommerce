@@ -32,7 +32,8 @@ class ProduitCrudController extends AbstractCrudController
                 ->setStoredAsCents(false),
             TextField::new('image_chemin'),
             IntegerField::new('stock'),
-            AssociationField::new('categorie')
+            AssociationField::new('categorie'),
+            IntegerField::new('remise')
         ];
     }
     

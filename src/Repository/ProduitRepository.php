@@ -35,4 +35,13 @@ class ProduitRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    // method to apply discount
+    public function applyDiscount() 
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.remise > 0')
+            ->getQuery()
+            ->getResult();
+    }
 }
