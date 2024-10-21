@@ -23,12 +23,12 @@ class EntrepriseCrudController extends AbstractCrudController
     {
         return [
             TextField::new('nom_entreprise'),
+            TextField::new('slug'),
             TextField::new('adresse_entreprise'),
             EmailField::new('email_entreprise'),
             TextField::new('img_entreprise'),
             AssociationField::new('user'),
-            DateTimeField::new('cree_le')
-            
+            DateTimeField::new('cree_le') 
         ];
     }
     
