@@ -53,6 +53,9 @@ class Entreprise
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $img_entreprise = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $slug = null;
+
     public function __toString()
     {
         return $this->nom_entreprise;
@@ -198,6 +201,18 @@ class Entreprise
     public function setImgEntreprise(?string $img_entreprise): static
     {
         $this->img_entreprise = $img_entreprise;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): static
+    {
+        $this->slug = $slug;
 
         return $this;
     }

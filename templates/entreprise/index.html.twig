@@ -19,8 +19,9 @@
                             <p class="text-center">{{ entreprise.adresseEntreprise }}</p>                       
                             <p class="text-center">{{ entreprise.emailEntreprise }}</p>                       
                         </div>
-                         <div class="mt-auto  text-center">
-                            <a href="#" class="btn btn-outline-secondary mt-1 mb-3" >Voir tous les produits</a>
+                         <div class="mt-auto d-flex justify-content-between">
+                            <a href="{{ path('app_entreprise_produits', {'slug': entreprise.slug}) }}" class="btn btn-outline-secondary mt-1 mb-3 mx-3" >Découvrez les produits</a>
+                            <a href="#" class="btn btn-outline-secondary mt-1 mb-3 mx-3" >Contactez-nous</a>
                         </div> 
                     </div>
                 </div>

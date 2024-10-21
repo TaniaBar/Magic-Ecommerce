@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Entreprise;
 use App\Entity\Produit;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -46,13 +47,13 @@ class ProduitRepository extends ServiceEntityRepository
     }
 
     // method to filter product company
-    // public function filterByCompany($entreprise)
-    // {
-    //     return $this->createQueryBuilder('p')
-    //         ->leftJoin('p.entreprise', 'e')
-    //         ->where('e.nom_entreprise = :entreprise')
-    //         ->setParameter('entreprise', $entreprise)
-    //         ->getQuery()
-    //         ->getResult();
-    // }
+    public function filterByCompany(Entreprise $entreprise)
+    {
+        return $this->createQueryBuilder('p')
+            ->leftJoin('p.entreprise', 'e')
+            ->where('e = :entreprise')
+            ->setParameter('entreprise', $entreprise)
+            ->getQuery()
+            ->getResult();
+    }
 }
