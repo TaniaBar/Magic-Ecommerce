@@ -20,19 +20,19 @@
                 {% endif %}
 
                 <h2 class="mt-4 mb-5 text-center">ME CONNECTER</h2>
-                <label for="inputEmail">E-mail</label>
+                <label for="inputEmail" class="mb-3">E-mail</label>
                 <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-                <label for="inputPassword" class="mt-4">Mot de passe</label>
+                <label for="inputPassword" class="mt-5 mb-3">Mot de passe</label>
                 <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
 
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
                 <div class="d-flex justify-content-between align-items-center mt-5">
-                    <button class="btn btn-primary btn-connexion" type="submit">Me connecter</button>
-                    <a href="{{ path('app_register') }}" class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover login-link">M'inscrire</a>
+                    <button class="btn btn-secondary btn-connexion mt-4" type="submit">Me connecter</button>
+                    <a href="{{ path('app_register') }}" class="login-link">M'inscrire</a>
                 </div>
-                <div class="text-end mb-4">
-                    <a href="#" class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover login-link">Mot de passe oublié?</a>
+                <div class="text-end mb-5">
+                    <a href="{{ path('reset_password_app_forgot_password_request') }}" class="login-link">Mot de passe oublié?</a>
                 </div>
             </form>
 
