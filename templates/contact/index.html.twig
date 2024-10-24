@@ -1,0 +1,46 @@
+{# <h1>Contacter {{ entreprise.nomEntreprise }}</h1>
+
+{{ form_start(form) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.message) }}
+    <button type="submit" class="btn btn-primary">{{ form.envoyer.vars.label }}</button>
+{{ form_end(form) }} #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Contacter Enchantements lunaires{% endblock %}
+
+{% block body %}
+    <h2 class="text-center mt-5 mb-4">Contacter Enchantements lunaires</h2>
+
+    <div class="container my-3 d-flex justify-content-center">
+        {# {{ form(formulaire) }} #}
+        <div class="col-md-6">
+
+            {# Check for 'success' flash messages and display them #}
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+
+            {{ form_start(formulaire) }}
+                <div class="my-4">
+                    {{ form_label(formulaire.email) }}
+                    {{ form_widget(formulaire.email, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(formulaire.email) }}
+                </div>
+                <div class="mb-4">
+                    {{ form_label(formulaire.message) }}
+                    {{ form_widget(formulaire.message, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(formulaire.message) }}
+                </div>
+
+                <div class="text-center mt-4 mb-5">
+                    {{ form_widget(formulaire.envoyer, {'attr': {'class': 'btn btn-secondary fw-bold'}}) }}
+                </div>
+            {{ form_end(formulaire) }}
+        </div>
+    </div>
+{% endblock %}
