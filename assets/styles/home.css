@@ -1,7 +1,6 @@
 .home-title {
     font-family: var(--font-title);
     font-size: min(max(1.5rem, 5vw), 3.5rem);
-    
 }
 
 .home-h3 {
@@ -16,16 +15,16 @@
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
 }
 
-.card-homepage {
+.container-homepage .row .card-homepage {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s;
 }
 
-.card-homepage:hover {
+.container-homepage .row .card-homepage:hover {
     transform: scale(1.05);
 }
 
-a.btn {
+a.btn-home {
     background-color: var(--primary-color);
     color: white;
     padding: 0.5rem 1rem;
@@ -34,12 +33,12 @@ a.btn {
     transition: background-color 0.3s;
 }
 
-a.btn:hover {
+a.btn-home:hover {
     background-color: var(--secondary-color);
     border-color: var(--secondary-color);
 }
 
-.div-img-home {
+.container-homepage .div-img-home {
     object-fit: cover;
     width: 100%;
     height: 250px;
