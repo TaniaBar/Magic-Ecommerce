@@ -4,14 +4,14 @@
 
 {% block body %}
 
-    <h2 class="text-center mt-3 fw-bold" >Détails de {{ produit.nom }}</h2>
+    <h2 class="text-center my-5 fw-bold" >Détails de {{ produit.nom }}</h2>
 
     <div class="text-start ms-5 my-4">
-        <a href="{{ path('app_produit_index') }}" class="link-opacity-75-hover a-inWines fw-bold fs-5 text-uppercase">← retour aux produits </a>
+        <a href="{{ path('app_produit_index') }}" class="link-opacity-75-hover fw-bold fs-5 text-uppercase my-5">← retour aux produits </a>
     </div>
 
     <section class="container my-3">
-        <div class="card">
+        <div class="card my-5">
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6 div-img">
@@ -19,7 +19,7 @@
                     </div>
                     <div class="col-md-6">
                         <h5 class="card-title text-center fw-bold fs-3 mb-4 mt-3">{{produit.nom}}</h5>
-                        <p class="card-text text-center fs-5 produit-description"> {{produit.description}}
+                        <p class="card-text text-center fs-5 produit-description mb-4"> {{produit.description}}
                         </p>
                         {% set prixRemise = produit.prix %}
                         <div class="d-flex justify-content-center align-items-center mb-2">
@@ -30,7 +30,7 @@
                             <p class="card-text text-center fw-bold text-danger">{{ prixRemise|number_format(2, '.', ',') }} €</p>
                         </div>
                         <div class="mt-auto text-center">
-                            <a href="#" class="btn btn-outline-secondary mt-4 mb-3">Ajouter au panier</a> 
+                            <a href="#" class="btn btn-home mt-4 mb-3">Ajouter au panier</a> 
                         </div>                           
                     </div>
                 </div>
