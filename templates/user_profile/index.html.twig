@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon profil{% endblock %}
+
+{% block body %}
+
+<div class="container my-4">
+    <h1 class="mb-4">Bienvenue {{ user.prenom }} ! </h1>
+
+    <div class="row">
+        <!-- Informations -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title mb-4">Mes informations</h2>
+                    <ul class="list-unstyled">
+                        <li class="mb-2 fs-6"><strong>Nom : </strong> {{ user.prenom }} {{user.nom }} </li>
+                        <li class="mb-2 fs-6"><strong>Email : </strong> {{ user.email }} </li>
+                        <li class="mb-2 fs-6"><strong>Adresse : </strong> {{ user.adresse }} </li>
+                        <li class="mb-2 fs-6"><strong>Code postale : </strong> {{ user.codePostal }} </li>
+                        <li class="mb-2 fs-6"><strong>Ville : </strong> {{ user.ville }} </li>
+                    </ul>
+                </div>
+                <div class="container mb-3">
+                    <a href="#" class="btn-login">Modifier mes coordonnées</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Commandes récentes -->
+         <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title mb-4">Mes commandes récentes</h2>
+                    {% if commandes_recentes %}
+                        <ul class="list-unstyled">
+                            {% for commande in commandes_recentes %}
+                                <li class="mb-3">
+                                    <a href="#">
+                                        Commande n° {{ commande.reference }} - 
+                                        {% if cree_le %}
+                                            Date: {{ cree_le|date('d/m/Y') }}
+                                        {% else %}
+                                            Date indisponible
+                                        {% endif %}
+                                        - Status: {{ commande.status }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>Vous n'avez pas encore passé de commandes.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>  
+
+    <!-- Liens rapides -->
+    <div class="row mt-4 mb-4">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title mb-4">Liens rapides</h2>
+                    <ul class="list-inline">
+                        <li class="list-inline-item" ><a href="{{ path('app_home') }}">Accueil</a></li>
+                        <li class="list-inline-item"><a href="#">Mon Panier</a></li>
+                        <li class="list-inline-item"><a href="#">Contactez-nous</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
