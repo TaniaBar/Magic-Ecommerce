@@ -1,3 +1,73 @@
-.a-header {
+/* .a-header {
     text-transform: uppercase;
+} */
+
+.navbar {
+    background-color: rgba(0, 0, 0, 0.8); /* Trasparente ma scuro */
+    padding: 1rem 2rem;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.bg-body-tertiary {
+    background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+.navbar-brand {
+    font-family: var(--font-title);
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    /* background-color: rgba(0, 0, 0, 0.8); */
+}
+
+.navbar-brand:hover {
+    color: var(--secondary-color);
+}
+
+.navbar-toggler {
+    border: none;
+}
+
+.navbar-toggler-icon {
+    filter: invert(1); /* Colore chiaro per il toggler */
+}
+
+/* Link dell'header */
+.a-header {
+    color: var(--accent-color);
+    padding: 0.5rem 1rem;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+.a-header:hover {
+    color: var(--secondary-color);
+    text-decoration: none;
+    border-bottom: 2px solid var(--secondary-color);
+}
+
+/* Dropdown */
+.dropdown-menu {
+    background-color: var(--background-color);
+    border: none;
+}
+
+.dropdown-menu:hover {
+    color: var(--secondary-color);
+}
+
+.dropdown-item {
+    color: var(--accent-color);
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+/* Icone e allineamento */
+.navbar-brand .ms-2, .nav-link .ms-2 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
 }
