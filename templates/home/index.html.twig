@@ -6,14 +6,14 @@
 
 <div>
     
-    <div class="w-100 h-60 mt-1 position-relative">
+    <section class="w-100 h-60 mt-1 position-relative">
         <img src="{{ asset('/images/candle1.jpg') }}" alt="candle image" class="w-100">
         <div class="overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column 
             justify-content-center align-items-center">
             <h1 class="text-center mt-4 text-white fw-bold home-title">ENCHANTEMENTS LUNAIRES</h1>
             <h3 class="text-center mb-4 text-white home-h3">Votre portail vers l'univers magique</h3>
         </div>
-    </div>
+    </section>
 
     {# <section id="calendrier-lunaire">
         <h2>Calendrier lunaire Mystique</h2>
@@ -22,18 +22,18 @@
 
     {# cards offres du moment #}
     <div class="container my-4">
-        <h2 class="text-center text-uppercase">Offres du moment</h2>
+        <h2 class="text-center text-uppercase mb-3">Offres du moment</h2>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
             {% for produit in produits %}
                 <div class="col"> 
-                    <div class="card card_homepage">
+                    <div class="card card-homepage">
                         <a href="{{ path('app_produit_details', { 'slug': produit.slug }) }}">
-                            <div class="div-img">
+                            <div class="div-img-home">
                                 <img src="{{ asset('images/' ~ produit.getImageChemin()) }}" class="card-img-top img-fluid" alt="{{ produit.nom }}">
                             </div>
                         </a>
                         <div class="card-title text-center">
-                            <a href="{{ path('app_produit_details', { 'slug': produit.slug }) }}" class="btn btn-outline-secondary mt-3">{{ produit.nom }}</a>
+                            <a href="{{ path('app_produit_details', { 'slug': produit.slug }) }}" class="btn btn-outline-secondary mt-3 btn-home">{{ produit.nom }}</a>
                         </div> 
                     </div>
                 </div>

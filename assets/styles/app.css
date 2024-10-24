@@ -1,5 +1,9 @@
 :root {
     --font-title: "Indie Flower", cursive;
+    --primary-color: #2d2a4a;  
+    --secondary-color: #a892ee; 
+    --accent-color: #f4e285;  
+    --background-color: #1e1c2c; 
 }
 
 * {
@@ -9,15 +13,22 @@
 }
 
 body {
-    background-color: grey;
-    color: white;
+    background-color: var(--background-color);
+    color: var(--accent-color);
+    font-family: 'Roboto', sans-serif;
 }
 
 a {
-    color: white;
+    color: var(--accent-color);
     text-decoration: none;
 }
 
 a:hover {
+    color: var(--secondary-color);
     text-decoration: underline;  
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-title);
+    color: var(--accent-color);
 }
