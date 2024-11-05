@@ -8,7 +8,7 @@
     <div class="row justify-content-center position-relative">
         <div class="col-md-6 col-lg-6 bg-white p-4 rounded shadow-sm div-form" >
 
-            <h1 class="h3 mb-4 font-weight-bold text-center">Inscrivez-vous</h1>
+            <h1 class="h3 mb-4 font-weight-bold text-center special-text-register">Inscrivez-vous</h1>
 
             <form method="post">
 
@@ -17,92 +17,106 @@
                 {{ form_start(registrationForm) }}
 
                     <div class="form-group mb-3">
-                        <label for="{{ registrationForm.roles.vars.id }}"> Vous vous inscrivez en tant que </label><br>
+                        <label for="{{ registrationForm.roles.vars.id }}" class="f-register"> Vous vous inscrivez en tant que </label><br>
                         {% for choice in registrationForm.roles %}
-                            <div class="form-check form-check-inline">
+                            <div class="form-check form-check-inline f-register">
                                 {{ form_widget(choice, {'attr': {'class': 'form-check-input role-selector'}}) }}
-                                <label class="form-check-label" for="{{ choice.vars.id }}">{{ choice.vars.label }}</label>
+                                <label class="form-check-label f-register" for="{{ choice.vars.id }}">{{ choice.vars.label }}</label>
                             </div>
                         {% endfor %}
                     </div>
 
                     {# campi aggiuntivi per l'azienda #}
                     <div id="company-fields" style="display: none;">
-                        <p>Champs pour enregistrer votre entreprise</p>
+                        <p class="special-text-register">Champs pour enregistrer votre entreprise</p>
                         <div class="form-group mb-3">
                             {{ form_row(registrationForm.nom_entreprise, {
                                 label: 'Nom de l\'entreprise',
+                                label_attr: {'class': 'f-register'}
                             }) }}
                         </div>
                         <div class="form-group mb-3">
                             {{ form_row(registrationForm.adresse_entreprise, { 
                                 label: 'Adresse de l\'entreprise',
+                                label_attr: {'class': 'f-register'}
                             }) }}
                         </div>
                         <div class="form-group mb-3">
                             {{ form_row(registrationForm.email_entreprise, { 
                                 label: 'E-mail de l\'entreprise',
+                                label_attr: {'class': 'f-register'}
                             }) }}
                         </div>
-                        <hr>
+                        <hr class="f-register">
                     </div> 
                     {# fine campi azienda #}
 
                     <div class="form-group mb-3">
                         {{ form_row(registrationForm.prenom, { 
                             label: 'Prénom',  
+                            label_attr: {'class': 'f-register'}
+                            
                         })}}
                     </div>
 
                     <div class="form-group mb-3">
                         {{ form_row(registrationForm.nom, { 
                             label: 'Nom',
+                            label_attr: {'class': 'f-register'}
                         })}}
                     </div>
 
                     <div class="form-group mb-3">
                         {{ form_row(registrationForm.adresse, { 
-                            label: 'Adresse',   
+                            label: 'Adresse', 
+                            label_attr: {'class': 'f-register'}  
                         })}}
                     </div>
 
                     <div class="form-group mb-3">
                         {{ form_row(registrationForm.code_postal, { 
                             label: 'Code postal',
+                            label_attr: {'class': 'f-register'}
                         })}}
                     </div>
 
                     <div class="form-group mb-3">
                         {{ form_row(registrationForm.ville, { 
                             label: 'Ville',
+                            label_attr: {'class': 'f-register'}
                         })}}
                     </div>
 
                     <div class="form-group mb-3">
                         {{ form_row(registrationForm.email, { 
-                            label: 'E-mail'    
+                            label: 'E-mail',
+                            label_attr: {'class': 'f-register'}    
                         })}}
                     </div>
 
                     <div class="form-group mb-3" >
-                        {{ form_row(registrationForm.plainPassword.first) }}                       
+                        {{ form_row(registrationForm.plainPassword.first, {
+                        label_attr: {'class': 'f-register'}
+                        }) }}                       
                     </div>
 
                     <div class="form-group mb-3">
-                        {{ form_row(registrationForm.plainPassword.second) }}                       
+                        {{ form_row(registrationForm.plainPassword.second, {
+                        label_attr: {'class': 'f-register'}
+                        }) }}                       
                     </div>
                     <div id="password-message" class="mt-2 mb-2"></div>
                     
                     <div class="form-group mb-3 d-flex align-items-center">
                         {{ form_widget(registrationForm.agreeTerms, { attr: { class: 'form-check-input' } }) }}
-                        {{ form_label(registrationForm.agreeTerms, 'J\'accepte les conditions', { label_attr: { class: 'form-check-label ms-2' } }) }}
+                        {{ form_label(registrationForm.agreeTerms, 'J\'accepte les conditions', { label_attr: { class: 'form-check-label ms-2 f-register' } }) }}
                         {{ form_errors(registrationForm.agreeTerms) }}
                     </div>
                     
                     <br>
                     <button type="submit" class="btn btn-outline-dark mt-4 mb-4 btn-register">M'inscrire</button>
                     <div class="text-end mb-3">
-                        <a href="{{ path('app_login') }}" class="text-end link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover login-link">Retour au login</a>
+                        <a href="{{ path('app_login') }}" class="text-end a-register">Retour au login</a>
                     </div>
 
                 {{ form_end(registrationForm) }}

@@ -1,0 +1,25 @@
+.f-register {
+    color: var(--secondary-color);
+}
+
+.special-text-register {
+    color: var(--primary-color);
+}
+
+.btn-register {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--accent-color);
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.btn-register:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.a-register {
+    color: var(--primary-color);
+}
