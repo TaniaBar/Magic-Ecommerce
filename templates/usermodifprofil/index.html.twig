@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier mes coordonnées{% endblock %}
+
+{% block body %}
+<section class="container my-5 position-relative">
+    <div class="row justify-content-center position-relative">
+        <div class="col-md-6 col-lg-6 bg-white p-4 rounded shadow-sm div-form">
+
+            <h1 class="h3 mb-4 font-weight-bold text-center special-text-modif">Modifier mes coordonnées</h1>
+
+            {{ form_start(form) }}
+            
+            <!-- Email Field -->
+            <div class="mb-3">
+                {{ form_label(form.email, 'Email', {'label_attr': {'class': 'form-label f-modif-profil'}}) }}
+                {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.email) }}
+            </div>
+
+            <!-- Lastname Field -->
+            <div class="mb-3">
+                {{ form_label(form.nom, 'Nom', {'label_attr': {'class': 'form-label f-modif-profil'}}) }}
+                {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.nom) }}
+            </div>
+
+            <!-- Firstname Field -->
+            <div class="mb-3">
+                {{ form_label(form.prenom, 'Prénom', {'label_attr': {'class': 'form-label f-modif-profil'}}) }}
+                {{ form_widget(form.prenom, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.prenom) }}
+            </div>
+
+            <!-- Address Field -->
+            <div class="mb-3">
+                {{ form_label(form.adresse, 'Adresse', {'label_attr': {'class': 'form-label f-modif-profil'}}) }}
+                {{ form_widget(form.adresse, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.adresse) }}
+            </div>
+
+            <!-- Zipcode Field -->
+            <div class="mb-3">
+                {{ form_label(form.code_postal, 'Code postal', {'label_attr': {'class': 'form-label f-modif-profil'}}) }}
+                {{ form_widget(form.code_postal, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.code_postal) }}
+            </div>
+
+            <!-- City Field -->
+            <div class="mb-3">
+                {{ form_label(form.ville, 'Ville', {'label_attr': {'class': 'form-label f-modif-profil'}}) }}
+                {{ form_widget(form.ville, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.ville) }}
+            </div>
+
+            
+            <button type="submit" class="btn btn-modif-profil">Enregistrer</button>
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+</section>
+
+{% endblock %}
