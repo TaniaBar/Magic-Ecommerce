@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon profil entreprise{% endblock %}
+
+{% block body %}
+    <div class="container my-4">
+        {% if entreprise %}
+        <h1 class="mb-4">Bienvenue {{ entreprise.nomEntreprise }} ! </h1>
+
+        <div class="row">
+            <!-- Informations -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title mb-4">Mes informations</h2>
+                        <ul class="list-unstyled">
+                            <li class="mb-2 fs-6"><strong>Nom Entreprise: </strong> {{ entreprise.nomEntreprise }} </li>
+                            <li class="mb-2 fs-6"><strong>Email : </strong> {{ entreprise.emailEntreprise }} </li>
+                            <li class="mb-2 fs-6"><strong>Adresse : </strong> {{ entreprise.adresseEntreprise }} </li>
+                        </ul>
+                    </div>
+                    <div class="container mb-3">
+                        <a href="#" class="btn-login">Modifier mes coordonnées</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lien pour les CRUDs produits -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title mb-4">Mettre à jour mes produits</h2>
+                        <ul class="list-unstyled">
+                            <li class="mb-2 fs-6"><a href="#">Ajouter un produit</a></li>
+                            <li class="mb-2 fs-6"><a href="#">Voir mes produits</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>  
+
+        <!-- Liens rapides -->
+        <div class="row mt-4 mb-4">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title mb-4">Liens rapides</h2>
+                        <ul class="list-inline">
+                            <li class="list-inline-item" ><a href="{{ path('app_home') }}">Accueil</a></li>
+                            <li class="list-inline-item"><a href="{{ path('app_contact_index') }}">Contactez-nous</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+        <p>Aucune entreprise associée à cet utilisateur</p>
+    {% endif %}
+{% endblock %}
