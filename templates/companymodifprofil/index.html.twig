@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier les coordonnées de mon entreprise{% endblock %}
+
+{% block body %}
+<section class="container my-5 position-relative">
+    <div class="row justify-content-center position-relative">
+        <div class="col-md-6 col-lg-6 bg-white p-4 rounded shadow-sm div-form">
+
+            <h1 class="h3 mb-4 font-weight-bold text-center special-text-modif">Modifier les coordonnées de mon entreprise</h1>
+
+            {{ form_start(form) }}
+            
+            <!-- Email Field -->
+            <div class="mb-3">
+                {{ form_label(form.email_entreprise, 'Email', {'label_attr': {'class': 'form-label f-modif-profil'}}) }}
+                {{ form_widget(form.email_entreprise, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.email_entreprise) }}
+            </div>
+
+            <!-- Lastname Field -->
+            <div class="mb-3">
+                {{ form_label(form.nom_entreprise, 'Nom', {'label_attr': {'class': 'form-label f-modif-profil'}}) }}
+                {{ form_widget(form.nom_entreprise, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.nom_entreprise) }}
+            </div>
+
+            <!-- Address Field -->
+            <div class="mb-3">
+                {{ form_label(form.adresse_entreprise, 'Adresse', {'label_attr': {'class': 'form-label f-modif-profil'}}) }}
+                {{ form_widget(form.adresse_entreprise, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.adresse_entreprise) }}
+            </div>
+            
+            <button type="submit" class="btn btn-modif-profil mt-4">Enregistrer</button>
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+</section>
+
+{% endblock %}
