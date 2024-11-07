@@ -38,7 +38,7 @@
 							<li>
 								{% if app.user %}
 									{% if 'ROLE_ENTREPRISE' in app.user.roles %}
-										<a href="#" class="dropdown-item a-header">ESPACE ENTREPRISE</a>
+										<a href="{{ path('app_company_profile_index') }}" class="dropdown-item a-header">ESPACE ENTREPRISE</a>
 									{% else %}
 										<a class="dropdown-item a-header" href="{{ path('app_user_profile_index') }}">ESPACE CLIENT</a>
 									{% endif %}
