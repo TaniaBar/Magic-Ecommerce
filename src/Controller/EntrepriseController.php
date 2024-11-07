@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Entreprise;
-use App\Entity\Produit;
 use App\Form\ContactType;
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
