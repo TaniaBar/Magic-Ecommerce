@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('/entreprise/profil/ajout-produit', name: 'app_add_product_')]
 class AddProductController extends AbstractController
@@ -23,7 +24,7 @@ class AddProductController extends AbstractController
     }
     
     #[Route('/', name: 'index')]
-    public function index(Request $request, Security $security, EntityManagerInterface $em): Response
+    public function index(Request $request, Security $security, EntityManagerInterface $em, SluggerInterface $slugger): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ENTREPRISE');
 
@@ -43,6 +44,12 @@ class AddProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $nom = $produit->getNom() ?? '';
+            if (!empty($nom)) {
+                $slug = $slugger->slug($nom)->lower();
+                $produit->setSlug($slug);
+            }
+
             $em->persist($produit);
             $em->flush();
 

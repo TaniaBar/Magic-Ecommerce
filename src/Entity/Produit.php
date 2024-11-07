@@ -63,6 +63,10 @@ class Produit
     #[ORM\Column(nullable: true)]
     private ?int $remise = null;
 
+    public function __toString()
+    {
+        return $this->slug;
+    }
 
     public function __construct()
     {
