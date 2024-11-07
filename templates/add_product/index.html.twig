@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un produit{% endblock %}
+
+{% block body %}
+<section class="container my-5 position-relative">
+    <div class="row justify-content-center position-relative">
+        <div class="col-md-6 col-lg-6 bg-white p-4 rounded shadow-sm div-form">
+
+            <h1 class="h3 mb-4 font-weight-bold text-center special-text-modif">Ajouter un produit</h1>
+
+            {# Mostra i messaggi di successo o errore, se esistono #}
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            {{ form_start(form) }}
+
+            <!-- Nom de l'entreprise -->
+            <div class="mb-3">
+                <label for="entreprise" class="form-label f-modif-profil">Nom de l'entreprise</label>
+                <input type="text" class="form-control" value="{{ app.user.getEntreprises().first().nomEntreprise }}" disabled>
+            </div>
+
+            <!-- Nom produit -->
+            <div class="mb-3">
+                {{ form_label(form.nom, 'Nom du produit', {'label_attr': {'class': 'form-label f-modif-profil'}}) }}
+                {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.nom) }}
+            </div>
+
+            <!-- Description produit -->
+            <div class="mb-3">
+                {{ form_label(form.description, 'Description du produit', {'label_attr': {'class': 'form-label f-modif-profil'}}) }}
+                {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.description) }}
+            </div>
+
+            <!-- En stock -->
+            <div class="mb-3">
+                {{ form_label(form.stock, 'En stock', {'label_attr': {'class': 'form-label f-modif-profil'}}) }}
+                {{ form_widget(form.stock, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.stock) }}
+            </div>
+
+            <!-- Catègorie -->
+            <div class="mb-3">
+                {{ form_label(form.categorie, 'Catègorie du produit', {'label_attr': {'class': 'form-label f-modif-profil'}}) }}
+                {{ form_widget(form.categorie, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.categorie) }}
+            </div>
+
+            <!-- Prix -->
+            <div class="mb-3">
+                {{ form_label(form.prix, 'Prix', {'label_attr': {'class': 'form-label f-modif-profil'}}) }}
+                {{ form_widget(form.prix, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.prix) }}
+            </div>
+
+            <!-- Remise -->
+            <div class="mb-3">
+                {{ form_label(form.remise, 'Remise', {'label_attr': {'class': 'form-label f-modif-profil'}}) }}
+                {{ form_widget(form.remise, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.remise) }}
+            </div>
+
+            <!-- Image chemin -->
+            <div class="mb-3">
+                {{ form_label(form.image_chemin, 'Chemin de l\'image du produit', {'label_attr': {'class': 'form-label f-modif-profil'}}) }}
+                {{ form_widget(form.image_chemin, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.image_chemin) }}
+            </div>
+            
+            <button type="submit" class="btn btn-modif-profil mt-4">Enregistrer</button>
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+

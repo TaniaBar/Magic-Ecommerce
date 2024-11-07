@@ -1,0 +1,10 @@
+.money-type {
+    display: inline-flex;
+    align-items: center;
+}
+
+.money-type .currency-symbol {
+    margin-left: 5px;
+    font-size: 0.8em;
+    color: var(--secondary-color);
+}
