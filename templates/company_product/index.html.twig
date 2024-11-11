@@ -30,7 +30,7 @@
                             </div>
 
                             <div class="mt-auto d-flex justify-content-between">
-                                <a href="#" class="btn btn-home mt-4 mb-3" >Modifier</a>
+                                <a href="{{ path('app_edit_product_index', {slug: produit.slug}) }}" class="btn btn-home mt-4 mb-3" >Modifier</a>
                                 <a href="{{ path('app_company_product_delete', {slug: produit.slug}) }}" class="btn btn-home mt-4 mb-3"
                                  onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce produit?');">
                                     Supprimer
