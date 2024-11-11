@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Produit;
+use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Response;
@@ -47,5 +48,31 @@ class CompanyProductController extends AbstractController
         return $this->render('company_product/index.html.twig', [
             'produits' => $produits,
         ]);
+    }
+
+    #[Route('/supprimer/{slug}', name: 'delete')]
+    public function delete(string $slug, ProduitRepository $produitRepo, EntityManagerInterface $em): Response
+    {
+        $user = $this->security->getUser();
+
+        if (!$user instanceof User) {
+            throw new \LogicException('L\'utilisateur n\'est pas valide.');
+        }
+
+        $produit = $produitRepo->findOneBy([
+            'slug' => $slug,
+            'entreprise' => $user->getEntreprises()->first(),
+        ]);
+
+        if (!$produit) {
+            $this->addFlash('error', 'Produit non trouvé');
+        }
+
+        $em->remove($produit);
+        $em->flush();
+        
+        $this->addFlash('success', 'Produit supprimé avec succès');
+
+        return $this->redirectToRoute('app_company_product_index');
     }
 }
