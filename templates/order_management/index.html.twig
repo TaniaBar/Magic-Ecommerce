@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des commandes{% endblock %}
+
+{% block body %}
+    <section class="container my-5">
+        <h1 class="text-center">Gestion des commandes</h1>
+
+        {% if commandes is empty %}
+            <p class="text-center">Aucune commande trouvée pour votre entreprise</p>
+        {% else %}
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Référence</th>
+                            <th>Date</th>
+                            <th>Statut</th>
+                            <th>Prix</th>
+                            <th>Détails</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for commande in commandes %}
+                            <tr>
+                                <td>{{ commande.reference }}</td>
+                                <td>{{ commande.creeLe|date('d/m/Y H:i') }}</td>
+                                <td>{{ commande.statut }}</td>
+                                <td>{{ commande.totPrix|number_format(2, ',', '.') }} €</td>
+                                <td>
+                                    <ul>
+                                        {% for detail in commande.commandeDetail %}
+                                            <li>
+                                                Produit: {{ detail.produit.nom }},
+                                                Quantité: {{ detail.quantite }},
+                                                Prix: {{ detail.prix|number_format(2, ',', '.') }} €
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+    </section>
+{% endblock %}

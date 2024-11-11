@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Commande;
+use App\Entity\Entreprise;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -15,6 +16,16 @@ class CommandeRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Commande::class);
     }
+
+    public function findByEntreprise(Entreprise $entreprise): array
+    {
+        return $this->createQueryBuilder('c')
+            ->join('c.commandeDetails', 'cd')
+            ->where('cd.entreprise = :entreprise')
+            ->setParameter('entreprise', $entreprise)
+            ->getQuery()
+            ->getResult();
+    } 
 
     //    /**
     //     * @return Commande[] Returns an array of Commande objects
