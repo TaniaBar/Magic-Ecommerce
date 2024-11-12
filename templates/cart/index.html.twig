@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Panier{% endblock %}
+
+{% block body %}
+    <section class="container my-5">
+        <h1 class="text-center">Mon Panier</h1>
+
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Produit</th>
+                        <th>Prix</th>
+                        <th>Quantité</th>
+                        <th>Total</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in data %}
+                        {% for produit in item.produit %}
+                        <tr>
+                            <td>{{ produit.nom }}</td>
+                            <td>{{ item.prix|number_format(2, '.', ',') }} €</td>
+                            <td>{{ item.quantite}}</td>
+                            <td>{{ (item.quantite * item.prix)|number_format(2, '.', ',')}} €</td>
+                            <td>
+                                <a href="{{ path('app_cart_add', { slug : produit.slug }) }}">+</a>
+                                <a href="#">-</a>
+                                <a href="#">Supprimer cet article</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="5">Pour le moment votre panier est vide.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3">Total</td>
+                        <td>{{ total|number_format(2, '.', ',') }} €</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <a href="#" class="">Valider et payer</a>
+    </section>
+{% endblock %}

@@ -30,7 +30,7 @@
                             <p class="card-text text-center fw-bold text-danger">{{ prixRemise|number_format(2, '.', ',') }} €</p>
                         </div>
                         <div class="mt-auto text-center">
-                            <a href="#" class="btn btn-home mt-4 mb-3">Ajouter au panier</a> 
+                            <a href="{{ path('app_cart_add', {'slug' : produit.slug}) }}" class="btn btn-home mt-4 mb-3">Ajouter au panier</a> 
                         </div>                           
                     </div>
                 </div>
