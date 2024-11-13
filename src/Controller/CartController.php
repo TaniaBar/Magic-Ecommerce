@@ -52,22 +52,18 @@ class CartController extends AbstractController
 
     // buttons add product
     #[Route('/ajout/{slug}', name: 'add')]
-    public function add(string $slug, EntityManagerInterface $em, ProduitRepository $produitRepo): Response
+    public function add(string $slug, EntityManagerInterface $em, ProduitRepository $produitRepo, PanierRepository $panierRepo): Response
     {
         $user = $this->getUser();
-        $produit = $produitRepo->findOneBy([
-            'slug' => $slug
-        ]);
+        $produit = $produitRepo->findOneBy(['slug' => $slug ]);
         // dd($produit);
 
         if (!$produit) {
             throw $this->createNotFoundException('Produit non trouvé!');
         }
 
-        // We see if the user’s cart already contains a product
-        $produitPanier = $em->getRepository(Panier::class)->findOneBy([
-            'user' => $user,
-        ]);
+        // find user and product for that cart
+        $produitPanier = $panierRepo->findOneByUserAndProduit($user, $produit);
 
         if ($produitPanier) {
             $produitPanier->setQuantite($produitPanier->getQuantite() + 1);

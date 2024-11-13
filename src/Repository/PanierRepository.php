@@ -16,6 +16,18 @@ class PanierRepository extends ServiceEntityRepository
         parent::__construct($registry, Panier::class);
     }
 
+    public function findOneByUserAndProduit($user, $produit)
+    {
+        return $this->createQueryBuilder('p')
+            ->innerJoin('p.produit', 'pr')
+            ->where('p.user = :user')
+            ->andWhere('pr = :produit')
+            ->setParameter('user', $user)
+            ->setParameter('produit', $produit)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
     //    /**
     //     * @return Panier[] Returns an array of Panier objects
     //     */
