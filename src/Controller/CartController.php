@@ -46,40 +46,40 @@ class CartController extends AbstractController
         ]);
     }
 
-    // #[Route('/ajout/{slug}', name: 'add')]
-    // public function add(string $slug, EntityManagerInterface $em, ProduitRepository $produitRepo): Response
-    // {
-    //     $user = $this->getUser();
-    //     $produit = $produitRepo->findOneBy(['slug' => $slug]);
+    #[Route('/ajout/{slug}', name: 'add')]
+    public function add(string $slug, EntityManagerInterface $em, ProduitRepository $produitRepo): Response
+    {
+        $user = $this->getUser();
+        $produit = $produitRepo->findOneBy(['slug' => $slug]);
+        // dd($produit);
 
-    //     if (!$produit) {
-    //         throw $this->createNotFoundException('Produit non trouvé!');
-    //     }
+        if (!$produit) {
+            throw $this->createNotFoundException('Produit non trouvé!');
+        }
 
-    //     $produitPanier = $em->getRepository(Panier::class)->findOneBy([
-    //         'user' => $user,
-    //         // 'produit' => $produit,
-    //     ]);
+        $produitPanier = $em->getRepository(Panier::class)->findOneBy([
+            'user' => $user,
+        ]);
 
-    //     if ($produitPanier) {
-    //         $produitPanier->setQuantite($produitPanier->getQuantite() + 1);
-    //     } else {
-    //         $produitPanier = new Panier();
-    //         $produitPanier->setUser($user);
-    //         $produitPanier->addProduit($produit);
-    //         $produitPanier->setQuantite(1);
-    //         $produitPanier->setCreeLe(new \DateTimeImmutable());
-    //         $prix = $produit->getPrix();
-    //         if ($produit->getRemise()) {
-    //             $produitAvecRemise = $produit->getRemise() / 100;
-    //             $prix -= $prix * $produitAvecRemise; 
-    //         }
+        if ($produitPanier) {
+            $produitPanier->setQuantite($produitPanier->getQuantite() + 1);
+        } else {
+            $produitPanier = new Panier();
+            $produitPanier->setUser($user);
+            $produitPanier->addProduit($produit);
+            $produitPanier->setQuantite(1);
+            $produitPanier->setCreeLe(new \DateTimeImmutable());
+            $prix = $produit->getPrix();
+            if ($produit->getRemise()) {
+                $produitAvecRemise = $produit->getRemise() / 100;
+                $prix -= $prix * $produitAvecRemise; 
+            }
 
-    //         $produitPanier->setPrix(round($prix, 2));
-    //         $em->persist($produitPanier);
-    //     }
+            $produitPanier->setPrix(round($prix, 2));
+            $em->persist($produitPanier);
+        }
 
-    //     $em->flush();
-    //     return $this->redirectToRoute('app_cart_index');
-    // }
+        $em->flush();
+        return $this->redirectToRoute('app_cart_index');
+    }
 }
