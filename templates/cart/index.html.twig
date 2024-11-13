@@ -27,7 +27,7 @@
                             <td>{{ (item.quantite * item.prix)|number_format(2, '.', ',')}} €</td>
                             <td>
                                 <a href="{{ path('app_cart_add', { slug : produit.slug }) }}">+</a>
-                                <a href="#">-</a>
+                                <a href="{{ path('app_cart_remove', { slug : produit.slug }) }}">-</a>
                                 <a href="#">Supprimer cet article</a>
                             </td>
                         </tr>

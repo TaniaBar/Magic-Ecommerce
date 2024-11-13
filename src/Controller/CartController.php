@@ -46,6 +46,7 @@ class CartController extends AbstractController
         ]);
     }
 
+    // buttons add product
     #[Route('/ajout/{slug}', name: 'add')]
     public function add(string $slug, EntityManagerInterface $em, ProduitRepository $produitRepo): Response
     {
@@ -57,6 +58,7 @@ class CartController extends AbstractController
             throw $this->createNotFoundException('Produit non trouvé!');
         }
 
+        // We see if the user’s cart already contains a product
         $produitPanier = $em->getRepository(Panier::class)->findOneBy([
             'user' => $user,
         ]);
@@ -80,6 +82,38 @@ class CartController extends AbstractController
         }
 
         $em->flush();
+        return $this->redirectToRoute('app_cart_index');
+    }
+
+    // button remove product
+    #[Route('/enlever/{slug}', name: 'remove')]
+    public function remove(string $slug, ProduitRepository $produitRepo, EntityManagerInterface $em, PanierRepository $panierRepo): Response
+    {
+        $user = $this->getUser();
+        $produit = $produitRepo->findOneBy(['slug' => $slug]);
+        // dd($produit);
+
+        if (!$produit) {
+            throw $this->createNotFoundException('Produit non trouvé!');
+        }
+
+        $produitPanier = $panierRepo->findOneBy([
+            'user' => $user,
+        ]);
+
+        // if there are no products in the cart or if there is no specific product in the cart
+        if (!$produitPanier || !$produitPanier->getProduit()->contains($produit)) {
+            return $this->redirectToRoute('app_cart_index');
+        }
+        
+        if ($produitPanier->getQuantite() > 1) {
+            $produitPanier->setQuantite($produitPanier->getQuantite() - 1);
+        } else {
+            $produitPanier->removeProduit($produit);
+        }
+        $em->persist($produitPanier);
+        $em->flush();
+
         return $this->redirectToRoute('app_cart_index');
     }
 }
