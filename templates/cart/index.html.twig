@@ -28,7 +28,7 @@
                             <td>
                                 <a href="{{ path('app_cart_add', { slug : produit.slug }) }}">+</a>
                                 <a href="{{ path('app_cart_remove', { slug : produit.slug }) }}">-</a>
-                                <a href="#">Supprimer cet article</a>
+                                <a href="{{ path('app_cart_delete', { slug : produit.slug }) }}">Supprimer cet article</a>
                             </td>
                         </tr>
                         {% endfor %}

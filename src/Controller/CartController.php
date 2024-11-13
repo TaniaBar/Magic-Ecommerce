@@ -6,13 +6,15 @@ use App\Entity\Panier;
 use App\Repository\PanierRepository;
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/panier', name: 'app_cart_')]
 class CartController extends AbstractController
 {
+
     #[Route('/', name: 'index')]
     public function index(ProduitRepository $produitRepo, PanierRepository $panierRepo): Response
     {
@@ -20,7 +22,9 @@ class CartController extends AbstractController
 
         $user = $this->getUser();
 
-        $produitsPanier = $panierRepo->findBy(['user' => $user]);
+        $produitsPanier = $panierRepo->findBy([
+            'user' => $user
+        ]);
         $data = [];
         $total = 0;
 
@@ -51,7 +55,9 @@ class CartController extends AbstractController
     public function add(string $slug, EntityManagerInterface $em, ProduitRepository $produitRepo): Response
     {
         $user = $this->getUser();
-        $produit = $produitRepo->findOneBy(['slug' => $slug]);
+        $produit = $produitRepo->findOneBy([
+            'slug' => $slug
+        ]);
         // dd($produit);
 
         if (!$produit) {
@@ -90,7 +96,9 @@ class CartController extends AbstractController
     public function remove(string $slug, ProduitRepository $produitRepo, EntityManagerInterface $em, PanierRepository $panierRepo): Response
     {
         $user = $this->getUser();
-        $produit = $produitRepo->findOneBy(['slug' => $slug]);
+        $produit = $produitRepo->findOneBy([
+            'slug' => $slug
+        ]);
         // dd($produit);
 
         if (!$produit) {
@@ -113,6 +121,38 @@ class CartController extends AbstractController
         }
         $em->persist($produitPanier);
         $em->flush();
+
+        return $this->redirectToRoute('app_cart_index');
+    }
+
+    // delete button 
+    #[Route('/delete/{slug}', name: 'delete')]
+    public function delete(string $slug, ProduitRepository $produitRepo, PanierRepository $panierRepo, EntityManagerInterface $em): Response
+    {
+        $user = $this->getUser();
+        $produit = $produitRepo->findOneBy([
+            'slug' => $slug
+        ]);
+
+        if (!$produit) {
+            throw $this->createNotFoundException('Produit non trouvé!');
+        }
+
+        $produitPanier = $panierRepo->findOneBy([
+            'user' => $user,
+        ]);
+
+        if ($produitPanier && $produitPanier->getProduit()->contains($produit)) {
+            $produitPanier->removeProduit($produit);
+        }
+
+        if ($produitPanier->getProduit()->isEmpty()) {
+            $em->remove($produitPanier);
+        } else {
+            $em->persist($produitPanier);
+        }
+        $em->flush();
+
 
         return $this->redirectToRoute('app_cart_index');
     }
