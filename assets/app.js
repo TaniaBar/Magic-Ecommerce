@@ -16,6 +16,7 @@ import './styles/nous.css';
 import './styles/register.css';
 import './styles/modifProfil.css';
 import './styles/addProductForm.css';
+import './styles/userProfile.css';
 
 console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
 
