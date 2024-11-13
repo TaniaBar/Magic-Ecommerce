@@ -17,15 +17,15 @@ class Panier
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Assert\NotBlank()]
-    #[Assert\PositiveOrZero()]
-    #[ORM\Column]
-    private ?int $quantite = null;
+    // #[Assert\NotBlank()]
+    // #[Assert\PositiveOrZero()]
+    // #[ORM\Column]
+    // private ?int $quantite = null;
 
-    #[Assert\NotBlank()]
-    #[Assert\PositiveOrZero()]
-    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
-    private ?string $prix = null;
+    // #[Assert\NotBlank()]
+    // #[Assert\PositiveOrZero()]
+    // #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
+    // private ?string $prix = null;
 
     #[ORM\Column(type: 'datetime_immutable', options: ['default' => 'CURRENT_TIMESTAMP'])]
     private ?\DateTimeImmutable $cree_le = null;
@@ -35,14 +35,14 @@ class Panier
     private ?User $user = null;
 
     /**
-     * @var Collection<int, produit>
+     * @var Collection<int, PanierProduit>
      */
-    #[ORM\ManyToMany(targetEntity: Produit::class, inversedBy: 'paniers')]
-    private Collection $produit;
+    #[ORM\OneToMany(targetEntity: PanierProduit::class, mappedBy: 'panier')]
+    private Collection $panierProduits;
 
     public function __construct()
     {
-        $this->produit = new ArrayCollection();
+        $this->panierProduits = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -50,29 +50,29 @@ class Panier
         return $this->id;
     }
 
-    public function getQuantite(): ?int
-    {
-        return $this->quantite;
-    }
+    // public function getQuantite(): ?int
+    // {
+    //     return $this->quantite;
+    // }
 
-    public function setQuantite(int $quantite): static
-    {
-        $this->quantite = $quantite;
+    // public function setQuantite(int $quantite): static
+    // {
+    //     $this->quantite = $quantite;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function getPrix(): ?string
-    {
-        return $this->prix;
-    }
+    // public function getPrix(): ?string
+    // {
+    //     return $this->prix;
+    // }
 
-    public function setPrix(string $prix): static
-    {
-        $this->prix = $prix;
+    // public function setPrix(string $prix): static
+    // {
+    //     $this->prix = $prix;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getCreeLe(): ?\DateTimeImmutable
     {
@@ -99,25 +99,31 @@ class Panier
     }
 
     /**
-     * @return Collection<int, produit>
+     * @return Collection<int, PanierProduit>
      */
-    public function getProduit(): Collection
+    public function getPanierProduits(): Collection
     {
-        return $this->produit;
+        return $this->panierProduits;
     }
 
-    public function addProduit(Produit $produit): static
+    public function addPanierProduit(PanierProduit $panierProduit): static
     {
-        if (!$this->produit->contains($produit)) {
-            $this->produit->add($produit);
+        if (!$this->panierProduits->contains($panierProduit)) {
+            $this->panierProduits->add($panierProduit);
+            $panierProduit->setPanier($this);
         }
 
         return $this;
     }
 
-    public function removeProduit(Produit $produit): static
+    public function removePanierProduit(PanierProduit $panierProduit): static
     {
-        $this->produit->removeElement($produit);
+        if ($this->panierProduits->removeElement($panierProduit)) {
+            // set the owning side to null (unless already changed)
+            if ($panierProduit->getPanier() === $this) {
+                $panierProduit->setPanier(null);
+            }
+        }
 
         return $this;
     }
