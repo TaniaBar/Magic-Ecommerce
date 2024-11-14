@@ -56,6 +56,12 @@ class CartController extends AbstractController
     #[Route('/ajout/{slug}', name: 'add')]
     public function add(string $slug, EntityManagerInterface $em, ProduitRepository $produitRepo, PanierRepository $panierRepo, PanierProduitRepository $panierProduitRepo): Response
     {
+        // Controlla se l'utente è autenticato
+        if (!$this->isGranted('IS_AUTHENTICATED_FULLY')) {
+            // Reindirizza l'utente alla pagina di login
+            return $this->redirectToRoute('app_login');
+        }
+
         $user = $this->getUser();
         $produit = $produitRepo->findOneBy(['slug' => $slug ]);
         // dd($produit);
