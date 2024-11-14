@@ -25,15 +25,25 @@
                             <tr>
                                 <td>{{ commande.reference }}</td>
                                 <td>{{ commande.creeLe|date('d/m/Y H:i') }}</td>
-                                <td>{{ commande.statut }}</td>
+                                {# <td>{{ commande.statut }}</td> #}
+                                <td>
+                                    <form action="{{ path('app_order_management_update_status', { id: commande.id }) }}" method="post" class="status-form">
+                                        <select name="statut" onchange="this.form.submit()" class="form-select">
+                                            <option value="COMMANDÉ" {{ commande.statut == 'COMMANDÉ' ? 'selected' : '' }}>Commandé</option>
+                                            <option value="EN_PREPARATION" {{ commande.statut == 'EN_PREPARATION' ? 'selected' : '' }}>En préparation</option>
+                                            <option value="ENVOYÉ" {{ commande.statut == 'ENVOYÉ' ? 'selected' : '' }}>Envoyé</option>
+                                            <option value="REMBOURSÉ" {{ commande.statut == 'REMBOURSÉ' ? 'selected' : '' }}>Remboursé</option>
+                                        </select>
+                                    </form>
+                                </td>
                                 <td>{{ commande.totalPrix|number_format(2, ',', '.') }} €</td>
                                 <td>
                                     <ul>
                                         {% for detail in commande.commandeDetails %}
                                             <li>
-                                                Produit: {{ detail.produit.nom }},
-                                                Quantité: {{ detail.quantite }},
-                                                Prix: {{ detail.prix|number_format(2, ',', '.') }} €
+                                                <strong>Produit:</strong> {{ detail.produit.nom }},
+                                                <strong>Quantité:</strong> {{ detail.quantite }},
+                                                <strong>Prix:</strong> {{ detail.prix|number_format(2, ',', '.') }} €
                                             </li>
                                         {% endfor %}
                                     </ul>

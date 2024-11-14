@@ -44,4 +44,26 @@ class OrderManagementController extends AbstractController
             'commandes' => $commandes,
         ]);
     }
+
+    #[Route('/mis-a-jour-statut/{id}', name: 'update_status', methods: ['POST'])]
+    public function updateStatus(int $id, Request $request, CommandeRepository $commandeRepo, EntityManagerInterface $em): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_ENTREPRISE');
+
+        // Recupera l'ordine in base all'ID
+        $commande = $commandeRepo->find($id);
+
+        if (!$commande) {
+            throw $this->createNotFoundException('Commande non trouvée.');
+        }
+
+        // Aggiorna lo stato dell'ordine in base al valore inviato dal modulo
+        $newStatus = $request->request->get('statut');
+        if (in_array($newStatus, ['COMMANDÉ', 'EN_PREPARATION', 'ENVOYÉ', 'REMBOURSÉ'])) {
+            $commande->setStatut($newStatus);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('app_order_management_index');
+    }
 }
