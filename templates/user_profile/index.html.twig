@@ -37,19 +37,18 @@
                             {% for commande in commandes_recentes %}
                                 <li class="mb-3">
                                     <hr>
-                                        Commande n° {{ commande.reference }} - 
-                                        {% if cree_le %}
-                                            Date: {{ cree_le|date('d/m/Y') }}
-                                        {% else %}
-                                            Date indisponible
-                                        {% endif %}
-                                        - Statut: {{ commande.statut }}
-                                    
+                                    Commande n° {{ commande.reference }} - 
+                                    {% if cree_le %}
+                                        Date: {{ cree_le|date('d/m/Y') }}
+                                    {% else %}
+                                        Date indisponible
+                                    {% endif %}
+                                    - Statut: {{ commande.statut }}
                                 </li>
                             {% endfor %}
                         </ul>
                     {% else %}
-                        <p>Vous n'avez pas encore passé de commandes.</p>
+                        <p class="my-3">Vous n'avez pas encore passé de commandes.</p>
                     {% endif %}
                 </div>
             </div>
