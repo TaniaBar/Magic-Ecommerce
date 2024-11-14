@@ -26,10 +26,10 @@
                                 <td>{{ commande.reference }}</td>
                                 <td>{{ commande.creeLe|date('d/m/Y H:i') }}</td>
                                 <td>{{ commande.statut }}</td>
-                                <td>{{ commande.totPrix|number_format(2, ',', '.') }} €</td>
+                                <td>{{ commande.totalPrix|number_format(2, ',', '.') }} €</td>
                                 <td>
                                     <ul>
-                                        {% for detail in commande.commandeDetail %}
+                                        {% for detail in commande.commandeDetails %}
                                             <li>
                                                 Produit: {{ detail.produit.nom }},
                                                 Quantité: {{ detail.quantite }},
