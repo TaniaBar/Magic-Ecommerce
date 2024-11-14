@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirmation de la commande{% endblock %}
+
+{% block body %}
+    <div class="container my-5 text-center">
+        <h1 class="text-center">Confirmation de la commande</h1>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <h2 class="card-title">Commande réussie!</h2>
+                    <p>Merci pour ta commande! Voici les détails:</p>
+                    
+                    <h3>Commande détails:</h3>
+                    <ul class="list-group">
+                        <li class="list-group-item">Numéro de la commande: <strong>{{ commande.reference }}</strong></li>
+                        <li class="list-group-item">Date de la commande: <strong>{{ commande.creeLe|date('d/m/Y H:i') }}</strong></li>
+                        <li class="list-group-item">Total de la commande: <strong>{{ total|number_format(2, '.', ',') }} €</strong></li>
+                        <li class="list-group-item">Statut de la commande: <strong>{{ commande.statut }} </strong></li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+        <a href="{{ path('app_home') }}" class="btn btn-home my-5">Retour à la page d'accueil</a>
+    </div>
+{% endblock %}

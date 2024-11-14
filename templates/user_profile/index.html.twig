@@ -36,15 +36,15 @@
                         <ul class="list-unstyled">
                             {% for commande in commandes_recentes %}
                                 <li class="mb-3">
-                                    <a href="#">
+                                    <hr>
                                         Commande n° {{ commande.reference }} - 
                                         {% if cree_le %}
                                             Date: {{ cree_le|date('d/m/Y') }}
                                         {% else %}
                                             Date indisponible
                                         {% endif %}
-                                        - Status: {{ commande.status }}
-                                    </a>
+                                        - Statut: {{ commande.statut }}
+                                    
                                 </li>
                             {% endfor %}
                         </ul>
