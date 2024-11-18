@@ -24,10 +24,12 @@ class AddProductController extends AbstractController
     }
     
     #[Route('/', name: 'index')]
-    public function index(Request $request, Security $security, EntityManagerInterface $em, SluggerInterface $slugger): Response
+    public function index(Request $request, EntityManagerInterface $em, SluggerInterface $slugger): Response
     {
+        // Only those with the role "ROLE_ENTREPRISE" can access to this page
         $this->denyAccessUnlessGranted('ROLE_ENTREPRISE');
 
+        // we retrieve the logged-in user
         $user = $this->security->getUser();
         // dd($user);
 
@@ -35,6 +37,7 @@ class AddProductController extends AbstractController
             throw new \LogicException('L\'utilisateur n\'est pas valide.');
         }
 
+        // we create a new element Produit and we find the company 
         $produit = new Produit();
         $produit->setEntreprise($user->getEntreprises()->first());
 
@@ -45,6 +48,7 @@ class AddProductController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $nom = $produit->getNom() ?? '';
+            // we create the slug 
             if (!empty($nom)) {
                 $slug = $slugger->slug($nom)->lower();
                 $produit->setSlug($slug);
