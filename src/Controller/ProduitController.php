@@ -5,9 +5,7 @@ namespace App\Controller;
 use App\Entity\Produit;
 use App\Repository\ProduitRepository;
 use App\Repository\CategorieRepository;
-use App\Repository\EntrepriseRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,6 +17,7 @@ class ProduitController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(EntityManagerInterface $em): Response
     {
+        // we search for products in ascending price order
         $produits = $em->getRepository(Produit::class)->findAllByPriceAsc();
 
         return $this->render('produit/index.html.twig', [
@@ -44,6 +43,7 @@ class ProduitController extends AbstractController
     #[Route('/categorie/{categorie}', name: 'find_category')]
     public function findCategory(CategorieRepository $categorieRepository, ProduitRepository $produitRepository, string $categorie): Response
     {
+        // we search for products by category
         $categoryEntity = $categorieRepository->findOneBy(['nom' => $categorie]);
 
         if (!$categoryEntity) {
