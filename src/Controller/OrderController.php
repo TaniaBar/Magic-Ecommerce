@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Commande;
 use App\Entity\CommandeDetail;
-use App\Entity\Panier;
 use App\Repository\PanierRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -38,7 +37,7 @@ class OrderController extends AbstractController
         $totalPrix = 0;
 
         foreach ($panier->getPanierProduits() as $panierProduit) {
-            // Ottieni il prodotto associato dal PanierProduit
+            // Get the associated product from PanierProduit
             $produit = $panierProduit->getProduit();
             
             // we create an order detail
@@ -48,7 +47,7 @@ class OrderController extends AbstractController
             $commandeDetail->setQuantite($panierProduit->getQuantite());
             $commandeDetail->setPrix($panierProduit->getPrix());
 
-            // Imposta l'azienda collegata al prodotto nel dettaglio dell'ordine
+            // Set the company related to the product in the order details
             $entreprise = $produit->getEntreprise();
             if ($entreprise) {
                 $commandeDetail->setEntreprise($entreprise);
