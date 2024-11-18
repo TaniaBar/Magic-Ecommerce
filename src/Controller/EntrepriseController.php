@@ -58,18 +58,21 @@ class EntrepriseController extends AbstractController
             throw $this->createNotFoundException('Entreprise introuvable!');
         }
         
+        // we call the form to contact the company
         $form = $this->createForm(ContactType::class);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
+            // We create a new instance of Email with information: email field, company email, message field
             $email = (new Email())
             ->from($data['email'])
             ->to($entreprise->getEmailEntreprise())
             ->subject('Nouveau message')
             ->text($data['message']);
 
+            // we send the email
             $mailer->send($email);
 
             $this->addFlash('success', 'Ton message à bien été envoyé!');
