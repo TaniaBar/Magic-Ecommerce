@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Entreprise;
 use App\Entity\User;
 use App\Form\CompanyModifProfilType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -30,10 +29,10 @@ class CompanymodifprofilController extends AbstractController
 
         if ($entreprises->isEmpty()) {
             $this->addFlash('warning', 'Aucune entreprise associée à cet utilisateur.');
-            return $this->redirectToRoute('app_home'); // O una rotta adeguata
+            return $this->redirectToRoute('app_home');
         }
 
-        // Se c'è solo un'azienda, prendi quella (altrimenti potrebbe essere necessario gestire più aziende)
+        // If the user has associated companies, select the first one
         $entreprise = $entreprises->first();
 
         $form = $this->createForm(CompanyModifProfilType::class, $entreprise, [
