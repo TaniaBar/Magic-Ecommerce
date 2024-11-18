@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/entreprise/profil/produit', name: 'app_company_product_')]
 class CompanyProductController extends AbstractController
 {
+    // Initializes the security service to manage the current user and access controls
     private Security $security;
 
     public function __construct(Security $security)
@@ -33,7 +34,6 @@ class CompanyProductController extends AbstractController
         }
 
         $entreprises = $user->getEntreprises();
-        // $entreprises->initialize();
         // dd($entreprises);
 
         if ($entreprises->isEmpty()) {
@@ -50,6 +50,7 @@ class CompanyProductController extends AbstractController
         ]);
     }
 
+    // button delete product in company area
     #[Route('/supprimer/{slug}', name: 'delete')]
     public function delete(string $slug, ProduitRepository $produitRepo, EntityManagerInterface $em): Response
     {
