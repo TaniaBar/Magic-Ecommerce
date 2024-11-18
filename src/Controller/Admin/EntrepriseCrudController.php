@@ -7,8 +7,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class EntrepriseCrudController extends AbstractCrudController
@@ -26,9 +24,12 @@ class EntrepriseCrudController extends AbstractCrudController
             TextField::new('slug'),
             TextField::new('adresse_entreprise'),
             EmailField::new('email_entreprise'),
-            TextField::new('img_entreprise'),
-            AssociationField::new('user'),
-            DateTimeField::new('cree_le') 
+            TextField::new('img_entreprise')
+                ->setLabel('Image Entreprise'),
+            AssociationField::new('user')
+                ->setLabel('Utilisateur'),
+            DateTimeField::new('cree_le')
+                ->setLabel('Créé le') 
         ];
     }
     
