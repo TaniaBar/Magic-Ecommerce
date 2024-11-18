@@ -7,6 +7,7 @@ use App\Entity\Commande;
 use App\Entity\CommandeDetail;
 use App\Entity\Entreprise;
 use App\Entity\Panier;
+use App\Entity\PanierProduit;
 use App\Entity\Produit;
 use App\Entity\User;
 use Symfony\Component\HttpFoundation\Response;
@@ -55,6 +56,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Produits', 'fa-solid fa-wand-sparkles', Produit::class);
         yield MenuItem::linkToCrud('Catégories', 'fa-solid fa-list', Categorie::class);
         yield MenuItem::linkToCrud('Paniers', 'fa-solid fa-cart-shopping', Panier::class);
+        yield MenuItem::linkToCrud('Panier Produits', 'fa-solid fa-wand-sparkles', PanierProduit::class);
         yield MenuItem::linkToCrud('Commandes', 'fa-solid fa-bag-shopping', Commande::class);
         yield MenuItem::linkToCrud('Commandes détails', 'fa-solid fa-info', CommandeDetail::class);
     }

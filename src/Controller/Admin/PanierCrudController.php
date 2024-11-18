@@ -15,14 +15,14 @@ class PanierCrudController extends AbstractCrudController
     }
 
     
-    public function configureFields(string $pageName): iterable
-    {
-        return [
-            AssociationField::new('user')
-                ->setLabel('Utilisateur'),
-            DateTimeField::new('cree_le')
-                ->setLabel('Créé le')
-        ];
-    }
+    // public function configureFields(string $pageName): iterable
+    // {
+    //     return [
+    //         AssociationField::new('user')
+    //             ->setLabel('Utilisateur'),
+    //         DateTimeField::new('cree_le')
+    //             ->setLabel('Créé le')
+    //     ];
+    // }
     
 }
