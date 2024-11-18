@@ -1,11 +1,3 @@
-{# <h1>Contacter {{ entreprise.nomEntreprise }}</h1>
-
-{{ form_start(form) }}
-    {{ form_row(form.email) }}
-    {{ form_row(form.message) }}
-    <button type="submit" class="btn btn-primary">{{ form.envoyer.vars.label }}</button>
-{{ form_end(form) }} #}
-
 {% extends 'base.html.twig' %}
 
 {% block title %}Contacter {{ entreprise.nomEntreprise }}{% endblock %}

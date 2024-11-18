@@ -9,7 +9,7 @@
 
             <h1 class="h3 mb-4 font-weight-bold text-center special-text-modif">Ajouter un produit</h1>
 
-            {# Mostra i messaggi di successo o errore, se esistono #}
+            {# Show success or error messages, if exists #}
             {% for message in app.flashes('success') %}
                 <div class="alert alert-success">
                     {{ message }}
@@ -18,55 +18,55 @@
 
             {{ form_start(form) }}
 
-            <!-- Nom de l'entreprise -->
+            <!-- company name -->
             <div class="mb-3">
                 <label for="entreprise" class="form-label f-modif-profil">Nom de l'entreprise</label>
                 <input type="text" class="form-control" value="{{ app.user.getEntreprises().first().nomEntreprise }}" disabled>
             </div>
 
-            <!-- Nom produit -->
+            <!-- product's name -->
             <div class="mb-3">
                 {{ form_label(form.nom, 'Nom du produit', {'label_attr': {'class': 'form-label f-modif-profil'}}) }}
                 {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
                 {{ form_errors(form.nom) }}
             </div>
 
-            <!-- Description produit -->
+            <!-- product description -->
             <div class="mb-3">
                 {{ form_label(form.description, 'Description du produit', {'label_attr': {'class': 'form-label f-modif-profil'}}) }}
                 {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
                 {{ form_errors(form.description) }}
             </div>
 
-            <!-- En stock -->
+            <!-- stock -->
             <div class="mb-3">
                 {{ form_label(form.stock, 'En stock', {'label_attr': {'class': 'form-label f-modif-profil'}}) }}
                 {{ form_widget(form.stock, {'attr': {'class': 'form-control'}}) }}
                 {{ form_errors(form.stock) }}
             </div>
 
-            <!-- Catègorie -->
+            <!-- Category -->
             <div class="mb-3">
                 {{ form_label(form.categorie, 'Catègorie du produit', {'label_attr': {'class': 'form-label f-modif-profil'}}) }}
                 {{ form_widget(form.categorie, {'attr': {'class': 'form-control'}}) }}
                 {{ form_errors(form.categorie) }}
             </div>
 
-            <!-- Prix -->
+            <!-- Price -->
             <div class="mb-3">
                 {{ form_label(form.prix, 'Prix', {'label_attr': {'class': 'form-label f-modif-profil'}}) }}
                 {{ form_widget(form.prix, {'attr': {'class': 'form-control'}}) }}
                 {{ form_errors(form.prix) }}
             </div>
 
-            <!-- Remise -->
+            <!-- Discount -->
             <div class="mb-3">
                 {{ form_label(form.remise, 'Remise', {'label_attr': {'class': 'form-label f-modif-profil'}}) }}
                 {{ form_widget(form.remise, {'attr': {'class': 'form-control'}}) }}
                 {{ form_errors(form.remise) }}
             </div>
 
-            <!-- Image chemin -->
+            <!-- Image path -->
             <div class="mb-3">
                 {{ form_label(form.image_chemin, 'Chemin de l\'image du produit', {'label_attr': {'class': 'form-label f-modif-profil'}}) }}
                 {{ form_widget(form.image_chemin, {'attr': {'class': 'form-control'}}) }}

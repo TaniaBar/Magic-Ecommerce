@@ -25,7 +25,7 @@
                             <tr>
                                 <td>{{ commande.reference }}</td>
                                 <td>{{ commande.creeLe|date('d/m/Y H:i') }}</td>
-                                {# <td>{{ commande.statut }}</td> #}
+                                
                                 <td>
                                     <form action="{{ path('app_order_management_update_status', { id: commande.id }) }}" method="post" class="status-form">
                                         <select name="statut" onchange="this.form.submit()" class="form-select">
