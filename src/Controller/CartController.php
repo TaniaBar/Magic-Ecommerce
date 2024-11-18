@@ -20,15 +20,19 @@ class CartController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(PanierRepository $panierRepo): Response
     {
+        // Only those with the role "ROLE_USER" can access to this page
         $this->denyAccessUnlessGranted('ROLE_USER');
 
+        // we retrieve the logged-in user
         $user = $this->getUser();
 
+        // We are looking for user cart
         $panier = $panierRepo->findOneBy(['user' => $user]);
 
         $data = [];
         $total = 0;
 
+        //  if cart exist
         if ($panier) {
             foreach($panier->getPanierProduits() as $produitPanier) {
                 $produit = $produitPanier->getProduit();
@@ -56,13 +60,14 @@ class CartController extends AbstractController
     #[Route('/ajout/{slug}', name: 'add')]
     public function add(string $slug, EntityManagerInterface $em, ProduitRepository $produitRepo, PanierRepository $panierRepo, PanierProduitRepository $panierProduitRepo): Response
     {
-        // Controlla se l'utente è autenticato
+        // Check if the user is authenticated
         if (!$this->isGranted('IS_AUTHENTICATED_FULLY')) {
-            // Reindirizza l'utente alla pagina di login
+            // if not Redirects the user to the login page
             return $this->redirectToRoute('app_login');
         }
 
         $user = $this->getUser();
+        // we search the product in the repository based on slug
         $produit = $produitRepo->findOneBy(['slug' => $slug ]);
         // dd($produit);
 
@@ -70,7 +75,7 @@ class CartController extends AbstractController
             throw $this->createNotFoundException('Produit non trouvé!');
         }
 
-        // Cerchiamo il carrello dell'utente, oppure ne creiamo uno se non esiste
+        // We search for the user’s cart, or create one if it does not exist
         $panier = $panierRepo->findOneBy(['user' => $user]);
 
         if (!$panier) {
@@ -80,14 +85,16 @@ class CartController extends AbstractController
             $em->persist($panier);
         }
 
-        // Cerchiamo se il prodotto è già presente in PanierProduit
+        // We are looking for if the product is already present in PanierProduit
         $produitPanier = $panierProduitRepo->findOneBy([
             'panier' => $panier, 
             'produit' => $produit
         ]);
 
+        // if yes, we increase the quantity +1
         if ($produitPanier) {
             $produitPanier->setQuantite($produitPanier->getQuantite() + 1);
+            // If not, we create the element
         } else {
             $produitPanier = new PanierProduit();
             $produitPanier->setPanier($panier);
@@ -135,8 +142,10 @@ class CartController extends AbstractController
             return $this->redirectToRoute('app_cart_index');
         }
 
+        // if the quantity is greater than one, we make -1
         if ($panierProduit->getQuantite() > 1) {
             $panierProduit->setQuantite($panierProduit->getQuantite() - 1);
+            // if the quantity is 1, we remove the product from the cart
         } else {
             $panier->removePanierProduit($panierProduit);
             $em->remove($panierProduit);
@@ -173,11 +182,11 @@ class CartController extends AbstractController
             return $this->redirectToRoute('app_cart_index');
         }
 
-        // rimuovi il prodotto dal carrello
+        // we remove the product from the cart
         $panier->removePanierProduit($panierProduit);
         $em->remove($panierProduit);
 
-        // se il carrello è vuoto elimina anche il carrello
+        // if the cart is empty, we delete the cart
         if ($panier->getPanierProduits()->isEmpty()) {
             $em->remove($panier);
         } else {
