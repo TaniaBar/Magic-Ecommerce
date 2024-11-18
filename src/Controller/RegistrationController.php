@@ -25,8 +25,8 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var string $plainPassword */
-            $plainPassword = $form->get('plainPassword')->getData();
+            
+            $plainPassword = (string) $form->get('plainPassword')->getData();
 
             // encode the plain password
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
@@ -34,18 +34,18 @@ class RegistrationController extends AbstractController
             $role = $form->get('roles')->getData();
             $user->setRoles([$role]);
 
-            // Controlla se l'utente ha selezionato il ruolo di impresa
+            // We check if the user checked ROLE_ENTREPRISE
         if ($role === 'ROLE_ENTREPRISE') {
-            // Crea un nuovo oggetto Entreprise e imposta i dati
+            // We create a new object Entreprise
             $entreprise = new Entreprise();
             $entreprise->setNomEntreprise($form->get('nom_entreprise')->getData());
             $entreprise->setAdresseEntreprise($form->get('adresse_entreprise')->getData());
             $entreprise->setEmailEntreprise($form->get('email_entreprise')->getData());
 
-            // Persisti l'oggetto Entreprise
+            // 
             $entityManager->persist($entreprise);
-            // Associa l'impresa all'utente, se necessario (a seconda della tua logica)
-            $user->addEntreprise($entreprise); // Assicurati di avere un metodo setEntreprise nell'oggetto User
+            // we associate the company with the user
+            $user->addEntreprise($entreprise); 
         }
 
             $entityManager->persist($user);
