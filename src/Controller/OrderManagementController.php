@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Commande;
 use App\Entity\User;
 use App\Repository\CommandeRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -29,15 +28,19 @@ class OrderManagementController extends AbstractController
 
         $user = $this->security->getUser();
         // dd($user);
+
         if (!$user instanceof User) {
             throw new \LogicException('L\'utilisateur n\'est pas valide.');
         }
+
+        // we choose the first company
         $entreprise = $user->getEntreprises()->first();
 
         if (!$entreprise) {
             throw new \LogicException('Entreprise non trouvé');
         }
 
+        // We are looking for orders relating to a company
         $commandes = $commandeRepo->findByEntreprise($entreprise);
 
         return $this->render('order_management/index.html.twig', [
@@ -50,14 +53,14 @@ class OrderManagementController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_ENTREPRISE');
 
-        // Recupera l'ordine in base all'ID
+        // Retrieve order based on ID
         $commande = $commandeRepo->find($id);
 
         if (!$commande) {
             throw $this->createNotFoundException('Commande non trouvée.');
         }
 
-        // Aggiorna lo stato dell'ordine in base al valore inviato dal modulo
+        // Update the order status based on the value sent by the form
         $newStatus = $request->request->get('statut');
         if (in_array($newStatus, ['COMMANDÉ', 'EN_PREPARATION', 'ENVOYÉ', 'REMBOURSÉ'])) {
             $commande->setStatut($newStatus);
