@@ -42,6 +42,11 @@ class Commande
     #[ORM\OneToMany(targetEntity: CommandeDetail::class, mappedBy: 'commande')]
     private Collection $commandeDetails;
 
+    public function __toString()
+    {
+        return $this->reference;
+    }
+
     public function __construct()
     {
         $this->commandeDetails = new ArrayCollection();

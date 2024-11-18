@@ -22,8 +22,9 @@ class CommandeDetailCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IntegerField::new('quantite'),
-            MoneyField::new('total_prix')
+            IntegerField::new('quantite')
+                ->setLabel('Quantité'),
+            MoneyField::new('prix')
                 ->setCurrency('EUR')
                 ->setStoredAsCents(false),
             AssociationField::new('commande'),
