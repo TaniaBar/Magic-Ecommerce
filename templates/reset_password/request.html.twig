@@ -10,15 +10,17 @@
 
     <div class="container mt-3">
         {{ form_start(requestForm) }}
-            {{ form_row(requestForm.email) }}
+            <div class="mb-3">
+                {{ form_row(requestForm.email, {'label_attr': {'class': 'me-3'}}) }}
+            </div>
             <div>
-                <p>
+                <p class="my-3">
                     Entrez votre adresse e-mail et nous vous enverrons un
                     lien pour réinitialiser votre mot de passe.
                 </p>
             </div>
 
-            <button class="btn btn-secondary mt-4 mb-5">Envoyer un email de réinitialisation du mot de passe</button>
+            <button class="btn btn-reset mt-4 mb-5">Envoyer un email de réinitialisation du mot de passe</button>
         {{ form_end(requestForm) }}
     </div>
 {% endblock %}

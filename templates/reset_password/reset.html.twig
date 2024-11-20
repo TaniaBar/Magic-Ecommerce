@@ -8,9 +8,9 @@
     <div class="container my-3 d-flex justify-content-center">
         {{ form_start(resetForm) }}
             <div class="my-5">
-                {{ form_row(resetForm.plainPassword, ) }}
+                {{ form_row(resetForm.plainPassword, {'label_attr': {'class': 'me-3'}} ) }}
             </div>
-            <button class="btn btn-primary btn-connexion mt-5 mb-5">Réinitialiser le mot de passe</button>
+            <button class="btn btn-reset mt-5 mb-5">Réinitialiser le mot de passe</button>
         {{ form_end(resetForm) }}
     </div>
 {% endblock %}
