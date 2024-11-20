@@ -36,11 +36,19 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 })
 
-document.addEventListener('DOMContentLoaded', function() {
-    const navbarToggler = document.querySelector('.navbar-toggler');
-    const navbarCollapse = document.querySelector('#navbarSupportedContent');
+// document.addEventListener('DOMContentLoaded', function() {
+//     const navbarToggler = document.querySelector('.navbar-toggler');
+//     const navbarCollapse = document.querySelector('#navbarSupportedContent');
     
-    navbarToggler.addEventListener('click', () => {
+//     navbarToggler.addEventListener('click', () => {
+//         navbarCollapse.classList.toggle('show');
+//     });
+// });
+
+document.addEventListener('click', (event) => {
+    const toggler = event.target.closest('.navbar-toggler');
+    if (toggler) {
+        const navbarCollapse = document.querySelector('#navbarSupportedContent');
         navbarCollapse.classList.toggle('show');
-    });
+    }
 });
